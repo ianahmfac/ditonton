@@ -1,22 +1,25 @@
-import 'package:ditonton/common/constants.dart';
-import 'package:ditonton/common/utils.dart';
-import 'package:ditonton/presentation/pages/about_page.dart';
-import 'package:ditonton/presentation/pages/movie_detail_page.dart';
-import 'package:ditonton/presentation/pages/home_movie_page.dart';
-import 'package:ditonton/presentation/pages/popular_movies_page.dart';
-import 'package:ditonton/presentation/pages/search_page.dart';
-import 'package:ditonton/presentation/pages/top_rated_movies_page.dart';
-import 'package:ditonton/presentation/pages/watchlist_movies_page.dart';
-import 'package:ditonton/presentation/provider/movie_detail_notifier.dart';
-import 'package:ditonton/presentation/provider/movie_list_notifier.dart';
-import 'package:ditonton/presentation/provider/movie_search_notifier.dart';
-import 'package:ditonton/presentation/provider/popular_movies_notifier.dart';
-import 'package:ditonton/presentation/provider/top_rated_movies_notifier.dart';
-import 'package:ditonton/presentation/provider/watchlist_movie_notifier.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
-import 'package:ditonton/injection.dart' as di;
+
+import 'common/constants.dart';
+import 'common/utils.dart';
+import 'injection.dart' as di;
+import 'presentation/pages/about_page.dart';
+import 'presentation/pages/home_movie_page.dart';
+import 'presentation/pages/home_tv_page.dart';
+import 'presentation/pages/movie_detail_page.dart';
+import 'presentation/pages/popular_movies_page.dart';
+import 'presentation/pages/search_page.dart';
+import 'presentation/pages/top_rated_movies_page.dart';
+import 'presentation/pages/watchlist_movies_page.dart';
+import 'presentation/provider/movie_detail_notifier.dart';
+import 'presentation/provider/movie_list_notifier.dart';
+import 'presentation/provider/movie_search_notifier.dart';
+import 'presentation/provider/popular_movies_notifier.dart';
+import 'presentation/provider/top_rated_movies_notifier.dart';
+import 'presentation/provider/tv_series_list_notifier.dart';
+import 'presentation/provider/watchlist_movie_notifier.dart';
 
 void main() {
   di.init();
@@ -45,6 +48,9 @@ class MyApp extends StatelessWidget {
         ),
         ChangeNotifierProvider(
           create: (_) => di.locator<WatchlistMovieNotifier>(),
+        ),
+        ChangeNotifierProvider(
+          create: (context) => di.locator<TvSeriesListNotifier>(),
         ),
       ],
       child: MaterialApp(
@@ -77,6 +83,8 @@ class MyApp extends StatelessWidget {
               return MaterialPageRoute(builder: (_) => WatchlistMoviesPage());
             case AboutPage.ROUTE_NAME:
               return MaterialPageRoute(builder: (_) => AboutPage());
+            case HomeTvPage.ROUTE_NAME:
+              return MaterialPageRoute(builder: (_) => HomeTvPage());
             default:
               return MaterialPageRoute(builder: (_) {
                 return Scaffold(
