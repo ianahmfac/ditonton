@@ -1,8 +1,11 @@
-import 'package:ditonton/common/state_enum.dart';
-import 'package:ditonton/presentation/provider/top_rated_movies_notifier.dart';
-import 'package:ditonton/presentation/widgets/movie_card_list.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
+
+import '../../common/constants.dart';
+import '../../common/state_enum.dart';
+import '../provider/top_rated_movies_notifier.dart';
+import '../widgets/movie_tv_card.dart';
+import 'movie_detail_page.dart';
 
 class TopRatedMoviesPage extends StatefulWidget {
   static const ROUTE_NAME = '/top-rated-movie';
@@ -15,9 +18,8 @@ class _TopRatedMoviesPageState extends State<TopRatedMoviesPage> {
   @override
   void initState() {
     super.initState();
-    Future.microtask(() =>
-        Provider.of<TopRatedMoviesNotifier>(context, listen: false)
-            .fetchTopRatedMovies());
+    Future.microtask(
+        () => Provider.of<TopRatedMoviesNotifier>(context, listen: false).fetchTopRatedMovies());
   }
 
   @override
@@ -38,7 +40,18 @@ class _TopRatedMoviesPageState extends State<TopRatedMoviesPage> {
               return ListView.builder(
                 itemBuilder: (context, index) {
                   final movie = data.movies[index];
-                  return MovieCard(movie);
+                  return MovieTvCard(
+                    onTap: () {
+                      Navigator.pushNamed(
+                        context,
+                        MovieDetailPage.ROUTE_NAME,
+                        arguments: movie.id,
+                      );
+                    },
+                    title: movie.title ?? '-',
+                    overview: movie.overview ?? '-',
+                    posterPath: '$BASE_IMAGE_URL/${movie.posterPath}',
+                  );
                 },
                 itemCount: data.movies.length,
               );

@@ -1,13 +1,13 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
-import '../../common/state_enum.dart';
 import '../../domain/entities/tv_series.dart';
 import '../provider/tv_series_list_notifier.dart';
 import '../widgets/app_drawer.dart';
 import '../widgets/home_app_bar.dart';
 import '../widgets/home_list_widget.dart';
 import '../widgets/home_sub_heading.dart';
+import '../widgets/state_widget_builder.dart';
 
 class HomeTvPage extends StatefulWidget {
   static const ROUTE_NAME = '/tv_series';
@@ -22,7 +22,10 @@ class _HomeTvPageState extends State<HomeTvPage> {
   void initState() {
     super.initState();
     Future.microtask(
-      () => context.read<TvSeriesListNotifier>().fetchNowPlayingTvSeries(),
+      () => context.read<TvSeriesListNotifier>()
+        ..fetchNowPlayingTvSeries()
+        ..fetchPopularTvSeries()
+        ..fetchTopRatedTvSeries(),
     );
   }
 
@@ -44,22 +47,49 @@ class _HomeTvPageState extends State<HomeTvPage> {
               Consumer<TvSeriesListNotifier>(
                 builder: (context, notifier, child) {
                   final state = notifier.nowPlayingState;
-                  if (state == RequestState.Loading) {
-                    return Center(
-                      child: CircularProgressIndicator(),
-                    );
-                  } else if (state == RequestState.Error) {
-                    return Text(notifier.message);
-                  } else if (state == RequestState.Loaded) {
-                    final nowPlayings = notifier.nowPlayings;
-                    return _tvSeriesList(nowPlayings);
-                  }
-                  return SizedBox();
+                  return StateWidgetBuilder(
+                    state: state,
+                    loadedWidget: (context) {
+                      final nowPlayings = notifier.nowPlayings;
+                      return _tvSeriesList(nowPlayings);
+                    },
+                    errorMessage: notifier.message,
+                  );
                 },
               ),
               HomeSubHeading(
                 title: 'Popular',
                 onTap: () {},
+              ),
+              Consumer<TvSeriesListNotifier>(
+                builder: (context, notifier, child) {
+                  final state = notifier.popularState;
+                  return StateWidgetBuilder(
+                    state: state,
+                    loadedWidget: (context) {
+                      final populars = notifier.populars;
+                      return _tvSeriesList(populars);
+                    },
+                    errorMessage: notifier.message,
+                  );
+                },
+              ),
+              HomeSubHeading(
+                title: 'Top Rated',
+                onTap: () {},
+              ),
+              Consumer<TvSeriesListNotifier>(
+                builder: (context, notifier, child) {
+                  final state = notifier.topRatedState;
+                  return StateWidgetBuilder(
+                    state: state,
+                    loadedWidget: (context) {
+                      final topRates = notifier.topRates;
+                      return _tvSeriesList(topRates);
+                    },
+                    errorMessage: notifier.message,
+                  );
+                },
               ),
             ],
           ),

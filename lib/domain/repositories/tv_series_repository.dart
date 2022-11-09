@@ -5,4 +5,6 @@ import '../entities/tv_series.dart';
 
 abstract class TvSeriesRepository {
   Future<Either<Failure, List<TvSeries>>> getNowPlayingTvSeries();
+  Future<Either<Failure, List<TvSeries>>> getPopularTvSeries(int page);
+  Future<Either<Failure, List<TvSeries>>> getTopRatedTvSeries(int page);
 }

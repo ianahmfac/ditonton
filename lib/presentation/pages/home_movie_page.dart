@@ -2,13 +2,13 @@ import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
 import '../../common/constants.dart';
-import '../../common/state_enum.dart';
 import '../../domain/entities/movie.dart';
 import '../provider/movie_list_notifier.dart';
 import '../widgets/app_drawer.dart';
 import '../widgets/home_app_bar.dart';
 import '../widgets/home_list_widget.dart';
 import '../widgets/home_sub_heading.dart';
+import '../widgets/state_widget_builder.dart';
 import 'home_tv_page.dart';
 import 'movie_detail_page.dart';
 import 'popular_movies_page.dart';
@@ -46,15 +46,13 @@ class _HomeMoviePageState extends State<HomeMoviePage> {
               HomeSubHeading(title: 'Now Playing'),
               Consumer<MovieListNotifier>(builder: (context, data, child) {
                 final state = data.nowPlayingState;
-                if (state == RequestState.Loading) {
-                  return Center(
-                    child: CircularProgressIndicator(),
-                  );
-                } else if (state == RequestState.Loaded) {
-                  return MovieList(data.nowPlayingMovies);
-                } else {
-                  return Text('Failed');
-                }
+                return StateWidgetBuilder(
+                  state: state,
+                  loadedWidget: (context) {
+                    return MovieList(data.nowPlayingMovies);
+                  },
+                  errorMessage: data.message,
+                );
               }),
               HomeSubHeading(
                 title: 'Popular',
@@ -62,15 +60,13 @@ class _HomeMoviePageState extends State<HomeMoviePage> {
               ),
               Consumer<MovieListNotifier>(builder: (context, data, child) {
                 final state = data.popularMoviesState;
-                if (state == RequestState.Loading) {
-                  return Center(
-                    child: CircularProgressIndicator(),
-                  );
-                } else if (state == RequestState.Loaded) {
-                  return MovieList(data.popularMovies);
-                } else {
-                  return Text('Failed');
-                }
+                return StateWidgetBuilder(
+                  state: state,
+                  loadedWidget: (context) {
+                    return MovieList(data.popularMovies);
+                  },
+                  errorMessage: data.message,
+                );
               }),
               HomeSubHeading(
                 title: 'Top Rated',
@@ -78,15 +74,13 @@ class _HomeMoviePageState extends State<HomeMoviePage> {
               ),
               Consumer<MovieListNotifier>(builder: (context, data, child) {
                 final state = data.topRatedMoviesState;
-                if (state == RequestState.Loading) {
-                  return Center(
-                    child: CircularProgressIndicator(),
-                  );
-                } else if (state == RequestState.Loaded) {
-                  return MovieList(data.topRatedMovies);
-                } else {
-                  return Text('Failed');
-                }
+                return StateWidgetBuilder(
+                  state: state,
+                  loadedWidget: (context) {
+                    return MovieList(data.topRatedMovies);
+                  },
+                  errorMessage: data.message,
+                );
               }),
             ],
           ),

@@ -1,9 +1,11 @@
-import 'package:ditonton/common/constants.dart';
-import 'package:ditonton/common/state_enum.dart';
-import 'package:ditonton/presentation/provider/movie_search_notifier.dart';
-import 'package:ditonton/presentation/widgets/movie_card_list.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
+
+import '../../common/constants.dart';
+import '../../common/state_enum.dart';
+import '../provider/movie_search_notifier.dart';
+import '../widgets/movie_tv_card.dart';
+import 'movie_detail_page.dart';
 
 class SearchPage extends StatelessWidget {
   static const ROUTE_NAME = '/search';
@@ -21,8 +23,7 @@ class SearchPage extends StatelessWidget {
           children: [
             TextField(
               onSubmitted: (query) {
-                Provider.of<MovieSearchNotifier>(context, listen: false)
-                    .fetchMovieSearch(query);
+                Provider.of<MovieSearchNotifier>(context, listen: false).fetchMovieSearch(query);
               },
               decoration: InputDecoration(
                 hintText: 'Search title',
@@ -49,7 +50,18 @@ class SearchPage extends StatelessWidget {
                       padding: const EdgeInsets.all(8),
                       itemBuilder: (context, index) {
                         final movie = data.searchResult[index];
-                        return MovieCard(movie);
+                        return MovieTvCard(
+                          onTap: () {
+                            Navigator.pushNamed(
+                              context,
+                              MovieDetailPage.ROUTE_NAME,
+                              arguments: movie.id,
+                            );
+                          },
+                          title: movie.title ?? '-',
+                          overview: movie.overview ?? '-',
+                          posterPath: '$BASE_IMAGE_URL/${movie.posterPath}',
+                        );
                       },
                       itemCount: result.length,
                     ),
