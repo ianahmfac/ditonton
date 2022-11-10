@@ -3,42 +3,36 @@ import 'package:provider/provider.dart';
 import 'package:pull_to_refresh/pull_to_refresh.dart';
 
 import '../../common/state_enum.dart';
-import '../provider/popular_tv_notifier.dart';
+import '../provider/top_rated_tv_notifier.dart';
 import '../widgets/movie_tv_card.dart';
 import '../widgets/state_widget_builder.dart';
 
-class PopularTvPage extends StatefulWidget {
-  static const ROUTE_NAME = '/popular-tv';
+class TopRatedTvPage extends StatefulWidget {
+  static const ROUTE_NAME = '/top-rated-tv';
 
   @override
-  _PopularTvPageState createState() => _PopularTvPageState();
+  _TopRatedTvPageState createState() => _TopRatedTvPageState();
 }
 
-class _PopularTvPageState extends State<PopularTvPage> {
+class _TopRatedTvPageState extends State<TopRatedTvPage> {
   late RefreshController _refreshController;
 
   @override
   void initState() {
     super.initState();
     _refreshController = RefreshController();
-    Future.microtask(() => context.read<PopularTvNotifier>().fetchPopularTvSeries());
-  }
-
-  @override
-  void dispose() {
-    _refreshController.dispose();
-    super.dispose();
+    Future.microtask(() => context.read<TopRatedTvNotifier>().fetchTopRatedTvSeries());
   }
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text('Popular TV Series'),
+        title: Text('Top Rated TV Series'),
       ),
       body: Padding(
         padding: const EdgeInsets.all(8.0),
-        child: Consumer<PopularTvNotifier>(
+        child: Consumer<TopRatedTvNotifier>(
           builder: (context, data, child) {
             return StateWidgetBuilder(
               state: data.state,
@@ -48,12 +42,12 @@ class _PopularTvPageState extends State<PopularTvPage> {
                   enablePullDown: true,
                   enablePullUp: true,
                   onRefresh: () async {
-                    await context.read<PopularTvNotifier>().fetchPopularTvSeries();
+                    await context.read<TopRatedTvNotifier>().fetchTopRatedTvSeries();
                     _refreshController.refreshCompleted();
                   },
                   onLoading: () async {
-                    final notifier = context.read<PopularTvNotifier>();
-                    await notifier.fetchPopularTvSeries(init: false);
+                    final notifier = context.read<TopRatedTvNotifier>();
+                    await notifier.fetchTopRatedTvSeries(init: false);
                     if (notifier.state == RequestState.Loaded) {
                       _refreshController.loadComplete();
                     } else {

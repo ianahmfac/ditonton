@@ -8,6 +8,8 @@ import '../widgets/home_app_bar.dart';
 import '../widgets/home_list_widget.dart';
 import '../widgets/home_sub_heading.dart';
 import '../widgets/state_widget_builder.dart';
+import 'popular_tv_page.dart';
+import 'top_rated_tv_page.dart';
 
 class HomeTvPage extends StatefulWidget {
   static const ROUTE_NAME = '/tv_series';
@@ -59,7 +61,7 @@ class _HomeTvPageState extends State<HomeTvPage> {
               ),
               HomeSubHeading(
                 title: 'Popular',
-                onTap: () {},
+                onTap: () => Navigator.pushNamed(context, PopularTvPage.ROUTE_NAME),
               ),
               Consumer<TvSeriesListNotifier>(
                 builder: (context, notifier, child) {
@@ -76,7 +78,7 @@ class _HomeTvPageState extends State<HomeTvPage> {
               ),
               HomeSubHeading(
                 title: 'Top Rated',
-                onTap: () {},
+                onTap: () => Navigator.pushNamed(context, TopRatedTvPage.ROUTE_NAME),
               ),
               Consumer<TvSeriesListNotifier>(
                 builder: (context, notifier, child) {
