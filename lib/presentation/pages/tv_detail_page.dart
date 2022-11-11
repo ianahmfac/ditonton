@@ -170,6 +170,7 @@ class _TvDetailContent extends StatelessWidget {
                                   final state = data.recommendationState;
                                   return StateWidgetBuilder(
                                     state: state,
+                                    errorMessage: data.message,
                                     loadedWidget: (context) {
                                       return SizedBox(
                                         height: 150,

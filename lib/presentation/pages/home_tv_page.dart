@@ -9,6 +9,7 @@ import '../widgets/home_list_widget.dart';
 import '../widgets/home_sub_heading.dart';
 import '../widgets/state_widget_builder.dart';
 import 'popular_tv_page.dart';
+import 'search_tv_page.dart';
 import 'top_rated_tv_page.dart';
 import 'tv_detail_page.dart';
 
@@ -39,7 +40,10 @@ class _HomeTvPageState extends State<HomeTvPage> {
         onMovieClick: () => Navigator.pushReplacementNamed(context, '/home'),
         onTvClick: () => Navigator.pop(context),
       ),
-      appBar: HomeAppBar(title: 'Ditonton - Tv Series'),
+      appBar: HomeAppBar(
+        title: 'Ditonton - Tv Series',
+        onSearch: () => Navigator.pushNamed(context, SearchTvPage.ROUTE_NAME),
+      ),
       body: SingleChildScrollView(
         child: Padding(
           padding: const EdgeInsets.all(8),

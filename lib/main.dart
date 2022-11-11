@@ -12,6 +12,7 @@ import 'presentation/pages/movie_detail_page.dart';
 import 'presentation/pages/popular_movies_page.dart';
 import 'presentation/pages/popular_tv_page.dart';
 import 'presentation/pages/search_page.dart';
+import 'presentation/pages/search_tv_page.dart';
 import 'presentation/pages/top_rated_movies_page.dart';
 import 'presentation/pages/top_rated_tv_page.dart';
 import 'presentation/pages/tv_detail_page.dart';
@@ -105,6 +106,8 @@ class MyApp extends StatelessWidget {
               return MaterialPageRoute(
                 builder: (_) => TvDetailPage(tvId: id ?? 0),
               );
+            case SearchTvPage.ROUTE_NAME:
+              return MaterialPageRoute(builder: (_) => SearchTvPage());
             default:
               return MaterialPageRoute(builder: (_) {
                 return Scaffold(

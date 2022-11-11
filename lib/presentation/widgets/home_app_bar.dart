@@ -1,12 +1,12 @@
 import 'package:flutter/material.dart';
 
-import '../pages/search_page.dart';
-
 class HomeAppBar extends StatelessWidget implements PreferredSizeWidget {
   final String title;
+  final void Function() onSearch;
   const HomeAppBar({
     Key? key,
     required this.title,
+    required this.onSearch,
   }) : super(key: key);
 
   @override
@@ -15,9 +15,7 @@ class HomeAppBar extends StatelessWidget implements PreferredSizeWidget {
       title: Text(title),
       actions: [
         IconButton(
-          onPressed: () {
-            Navigator.pushNamed(context, SearchPage.ROUTE_NAME);
-          },
+          onPressed: onSearch,
           icon: Icon(Icons.search),
         )
       ],

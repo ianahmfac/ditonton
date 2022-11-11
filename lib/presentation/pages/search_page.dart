@@ -22,6 +22,7 @@ class SearchPage extends StatelessWidget {
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
             TextField(
+              autofocus: true,
               onSubmitted: (query) {
                 Provider.of<MovieSearchNotifier>(context, listen: false).fetchMovieSearch(query);
               },

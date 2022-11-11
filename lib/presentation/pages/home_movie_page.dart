@@ -12,6 +12,7 @@ import '../widgets/state_widget_builder.dart';
 import 'home_tv_page.dart';
 import 'movie_detail_page.dart';
 import 'popular_movies_page.dart';
+import 'search_page.dart';
 import 'top_rated_movies_page.dart';
 
 class HomeMoviePage extends StatefulWidget {
@@ -36,7 +37,10 @@ class _HomeMoviePageState extends State<HomeMoviePage> {
         onMovieClick: () => Navigator.pop(context),
         onTvClick: () => Navigator.pushReplacementNamed(context, HomeTvPage.ROUTE_NAME),
       ),
-      appBar: HomeAppBar(title: 'Ditonton - Movies'),
+      appBar: HomeAppBar(
+        title: 'Ditonton - Movies',
+        onSearch: () => Navigator.pushNamed(context, SearchPage.ROUTE_NAME),
+      ),
       body: Padding(
         padding: const EdgeInsets.all(8.0),
         child: SingleChildScrollView(
