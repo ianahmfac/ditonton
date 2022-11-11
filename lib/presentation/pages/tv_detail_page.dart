@@ -48,7 +48,11 @@ class __TvDetailPageDataState extends State<_TvDetailPageData> {
   @override
   void initState() {
     super.initState();
-    Future.microtask(() => context.read<TvDetailNotifier>().fetchDetail(widget.tvId));
+    Future.microtask(
+      () => context.read<TvDetailNotifier>()
+        ..fetchDetail(widget.tvId)
+        ..fetchRecommendations(widget.tvId),
+    );
   }
 
   @override
@@ -161,6 +165,51 @@ class _TvDetailContent extends StatelessWidget {
                               TvSeasonWidget(seasons: tvDetail.seasons),
                               SizedBox(height: 16),
                               Text('Recommendations', style: kHeading6),
+                              Consumer<TvDetailNotifier>(
+                                builder: (context, data, child) {
+                                  final state = data.recommendationState;
+                                  return StateWidgetBuilder(
+                                    state: state,
+                                    loadedWidget: (context) {
+                                      return SizedBox(
+                                        height: 150,
+                                        child: ListView.builder(
+                                          scrollDirection: Axis.horizontal,
+                                          itemBuilder: (context, index) {
+                                            final tv = data.recommendations[index];
+                                            return Padding(
+                                              padding: const EdgeInsets.all(4.0),
+                                              child: InkWell(
+                                                onTap: () {
+                                                  Navigator.pushNamed(
+                                                    context,
+                                                    TvDetailPage.ROUTE_NAME,
+                                                    arguments: tv.id,
+                                                  );
+                                                },
+                                                child: ClipRRect(
+                                                  borderRadius: BorderRadius.all(
+                                                    Radius.circular(8),
+                                                  ),
+                                                  child: CachedNetworkImage(
+                                                    imageUrl: tv.posterPath ?? '',
+                                                    placeholder: (context, url) => Center(
+                                                      child: CircularProgressIndicator(),
+                                                    ),
+                                                    errorWidget: (context, url, error) =>
+                                                        Icon(Icons.broken_image),
+                                                  ),
+                                                ),
+                                              ),
+                                            );
+                                          },
+                                          itemCount: data.recommendations.length,
+                                        ),
+                                      );
+                                    },
+                                  );
+                                },
+                              ),
                             ],
                           ),
                         ),

@@ -18,6 +18,7 @@ import 'domain/usecases/get_popular_tv_series.dart';
 import 'domain/usecases/get_top_rated_movies.dart';
 import 'domain/usecases/get_top_rated_tv_series.dart';
 import 'domain/usecases/get_tv_detail.dart';
+import 'domain/usecases/get_tv_detail_recommendation.dart';
 import 'domain/usecases/get_watchlist_movies.dart';
 import 'domain/usecases/get_watchlist_status.dart';
 import 'domain/usecases/remove_watchlist.dart';
@@ -83,7 +84,10 @@ void init() {
   );
   locator.registerFactory(() => PopularTvNotifier(getPopularTvSeries: locator()));
   locator.registerFactory(() => TopRatedTvNotifier(getTopRatedTvSeries: locator()));
-  locator.registerFactory(() => TvDetailNotifier(getTvDetail: locator()));
+  locator.registerFactory(() => TvDetailNotifier(
+        getTvDetail: locator(),
+        getTvDetailRecommendation: locator(),
+      ));
 
   // use case
   locator.registerLazySingleton(() => GetNowPlayingMovies(locator()));
@@ -100,6 +104,7 @@ void init() {
   locator.registerLazySingleton(() => GetPopularTvSeries(repository: locator()));
   locator.registerLazySingleton(() => GetTopRatedTvSeries(repository: locator()));
   locator.registerLazySingleton(() => GetTvDetail(tvSeriesRepository: locator()));
+  locator.registerLazySingleton(() => GetTvDetailRecommendation(tvSeriesRepository: locator()));
 
   // repository
   locator.registerLazySingleton<MovieRepository>(
