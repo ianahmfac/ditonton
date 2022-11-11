@@ -10,6 +10,7 @@ import '../widgets/home_sub_heading.dart';
 import '../widgets/state_widget_builder.dart';
 import 'popular_tv_page.dart';
 import 'top_rated_tv_page.dart';
+import 'tv_detail_page.dart';
 
 class HomeTvPage extends StatefulWidget {
   static const ROUTE_NAME = '/tv_series';
@@ -109,7 +110,11 @@ class _HomeTvPageState extends State<HomeTvPage> {
         itemBuilder: (context, index) {
           final tvSeries = listTvSeries[index];
           return HomeListWidget(
-            onTap: () {},
+            onTap: () => Navigator.pushNamed(
+              context,
+              TvDetailPage.ROUTE_NAME,
+              arguments: tvSeries.id,
+            ),
             posterPath: tvSeries.posterPath,
           );
         },

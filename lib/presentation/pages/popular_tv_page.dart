@@ -6,6 +6,7 @@ import '../../common/state_enum.dart';
 import '../provider/popular_tv_notifier.dart';
 import '../widgets/movie_tv_card.dart';
 import '../widgets/state_widget_builder.dart';
+import 'tv_detail_page.dart';
 
 class PopularTvPage extends StatefulWidget {
   static const ROUTE_NAME = '/popular-tv';
@@ -64,7 +65,11 @@ class _PopularTvPageState extends State<PopularTvPage> {
                     itemBuilder: (context, index) {
                       final tv = data.tvSeries[index];
                       return MovieTvCard(
-                        onTap: () {},
+                        onTap: () => Navigator.pushNamed(
+                          context,
+                          TvDetailPage.ROUTE_NAME,
+                          arguments: tv.id,
+                        ),
                         title: tv.name,
                         overview: tv.overview,
                         posterPath: tv.posterPath ?? '',

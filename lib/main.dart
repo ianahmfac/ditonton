@@ -14,6 +14,7 @@ import 'presentation/pages/popular_tv_page.dart';
 import 'presentation/pages/search_page.dart';
 import 'presentation/pages/top_rated_movies_page.dart';
 import 'presentation/pages/top_rated_tv_page.dart';
+import 'presentation/pages/tv_detail_page.dart';
 import 'presentation/pages/watchlist_movies_page.dart';
 import 'presentation/provider/movie_detail_notifier.dart';
 import 'presentation/provider/movie_list_notifier.dart';
@@ -99,6 +100,11 @@ class MyApp extends StatelessWidget {
               return MaterialPageRoute(builder: (_) => PopularTvPage());
             case TopRatedTvPage.ROUTE_NAME:
               return MaterialPageRoute(builder: (_) => TopRatedTvPage());
+            case TvDetailPage.ROUTE_NAME:
+              final id = settings.arguments as int?;
+              return MaterialPageRoute(
+                builder: (_) => TvDetailPage(tvId: id ?? 0),
+              );
             default:
               return MaterialPageRoute(builder: (_) {
                 return Scaffold(
