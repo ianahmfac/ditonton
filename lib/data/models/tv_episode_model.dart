@@ -59,7 +59,7 @@ class TvEpisodeModel extends Equatable {
       id: json['id']?.toInt() ?? 0,
       name: json['name'] ?? '',
       overview: json['overview'] ?? '',
-      stillPath: json['still_path'],
+      stillPath: json['still_path'] != null ? '$BASE_IMAGE_URL${json['still_path']}' : null,
       episodeNumber: json['episode_number']?.toInt() ?? 0,
     );
   }
@@ -68,7 +68,7 @@ class TvEpisodeModel extends Equatable {
         id: id,
         name: name,
         overview: overview,
-        stillPath: '$BASE_IMAGE_URL$stillPath',
+        stillPath: stillPath,
         episodeNumber: episodeNumber,
       );
 }

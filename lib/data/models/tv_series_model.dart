@@ -50,8 +50,8 @@ class TvSeriesModel extends Equatable {
       'id': id,
       'name': name,
       'overview': overview,
-      'backdropPath': backdropPath,
-      'posterPath': posterPath,
+      'backdrop_path': backdropPath,
+      'poster_path': posterPath,
     };
   }
 
@@ -60,8 +60,9 @@ class TvSeriesModel extends Equatable {
       id: json['id']?.toInt() ?? 0,
       name: json['name'] ?? '',
       overview: json['overview'] ?? '',
-      backdropPath: json['backdrop_path'],
-      posterPath: json['poster_path'],
+      backdropPath:
+          json['backdrop_path'] != null ? '$BASE_IMAGE_URL${json['backdrop_path']}' : null,
+      posterPath: json['poster_path'] != null ? '$BASE_IMAGE_URL${json['poster_path']}' : null,
     );
   }
 
@@ -70,8 +71,8 @@ class TvSeriesModel extends Equatable {
       id: this.id,
       name: this.name,
       overview: this.overview,
-      backdropPath: this.backdropPath != null ? '$BASE_IMAGE_URL${this.backdropPath}' : null,
-      posterPath: this.posterPath != null ? '$BASE_IMAGE_URL${this.posterPath}' : null,
+      backdropPath: this.backdropPath,
+      posterPath: this.posterPath,
     );
   }
 

@@ -1,5 +1,7 @@
-import 'package:ditonton/domain/entities/tv_season.dart';
 import 'package:equatable/equatable.dart';
+
+import '../../common/constants.dart';
+import '../../domain/entities/tv_season.dart';
 
 class TvSeasonModel extends Equatable {
   final int id;
@@ -63,7 +65,7 @@ class TvSeasonModel extends Equatable {
       id: json['id']?.toInt() ?? 0,
       name: json['name'] ?? '',
       overview: json['overview'] ?? '',
-      posterPath: json['poster_path'] ?? '',
+      posterPath: json['poster_path'] != null ? '$BASE_IMAGE_URL${json['poster_path']}' : null,
       seasonNumber: json['season_number']?.toInt() ?? 0,
       episodeCount: json['episode_count']?.toInt() ?? 0,
     );
