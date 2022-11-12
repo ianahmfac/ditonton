@@ -36,22 +36,25 @@ class TvSeasonWidget extends StatelessWidget {
                         width: 250,
                         child: Stack(
                           children: [
-                            ClipRRect(
-                              borderRadius: BorderRadius.vertical(
-                                top: Radius.circular(16),
-                              ),
-                              child: Opacity(
-                                opacity: 0.2,
-                                child: CachedNetworkImage(
-                                  imageUrl: season.posterPath ?? '',
-                                  placeholder: (context, url) => Center(
-                                    child: CircularProgressIndicator(),
+                            Container(
+                              color: Colors.black,
+                              child: ClipRRect(
+                                borderRadius: BorderRadius.vertical(
+                                  top: Radius.circular(16),
+                                ),
+                                child: Opacity(
+                                  opacity: 0.3,
+                                  child: CachedNetworkImage(
+                                    imageUrl: season.posterPath ?? '',
+                                    placeholder: (context, url) => Center(
+                                      child: CircularProgressIndicator(),
+                                    ),
+                                    height: 150,
+                                    width: double.infinity,
+                                    fit: BoxFit.fitWidth,
+                                    errorWidget: (context, url, error) =>
+                                        Icon(Icons.broken_image_sharp),
                                   ),
-                                  height: 150,
-                                  width: double.infinity,
-                                  fit: BoxFit.fitWidth,
-                                  errorWidget: (context, url, error) =>
-                                      Icon(Icons.broken_image_sharp),
                                 ),
                               ),
                             ),
