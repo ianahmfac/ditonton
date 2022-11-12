@@ -16,7 +16,7 @@ import 'presentation/pages/search_tv_page.dart';
 import 'presentation/pages/top_rated_movies_page.dart';
 import 'presentation/pages/top_rated_tv_page.dart';
 import 'presentation/pages/tv_detail_page.dart';
-import 'presentation/pages/watchlist_movies_page.dart';
+import 'presentation/pages/watchlist_page.dart';
 import 'presentation/provider/movie_detail_notifier.dart';
 import 'presentation/provider/movie_list_notifier.dart';
 import 'presentation/provider/movie_search_notifier.dart';
@@ -26,6 +26,7 @@ import 'presentation/provider/top_rated_movies_notifier.dart';
 import 'presentation/provider/top_rated_tv_notifier.dart';
 import 'presentation/provider/tv_series_list_notifier.dart';
 import 'presentation/provider/watchlist_movie_notifier.dart';
+import 'presentation/provider/watchlist_tv_notifier.dart';
 
 void main() {
   di.init();
@@ -64,6 +65,9 @@ class MyApp extends StatelessWidget {
         ChangeNotifierProvider(
           create: (context) => di.locator<TopRatedTvNotifier>(),
         ),
+        ChangeNotifierProvider(
+          create: (context) => di.locator<WatchListTvNotifier>(),
+        ),
       ],
       child: MaterialApp(
         title: 'Flutter Demo',
@@ -91,8 +95,8 @@ class MyApp extends StatelessWidget {
               );
             case SearchPage.ROUTE_NAME:
               return CupertinoPageRoute(builder: (_) => SearchPage());
-            case WatchlistMoviesPage.ROUTE_NAME:
-              return MaterialPageRoute(builder: (_) => WatchlistMoviesPage());
+            case WatchlistPage.ROUTE_NAME:
+              return MaterialPageRoute(builder: (_) => WatchlistPage());
             case AboutPage.ROUTE_NAME:
               return MaterialPageRoute(builder: (_) => AboutPage());
             case HomeTvPage.ROUTE_NAME:

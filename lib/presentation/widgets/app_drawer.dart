@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 
 import '../pages/about_page.dart';
-import '../pages/watchlist_movies_page.dart';
+import '../pages/watchlist_page.dart';
 
 class AppDrawer extends StatelessWidget {
   final void Function() onMovieClick;
@@ -38,7 +38,7 @@ class AppDrawer extends StatelessWidget {
             leading: Icon(Icons.save_alt),
             title: Text('Watchlist'),
             onTap: () {
-              Navigator.pushNamed(context, WatchlistMoviesPage.ROUTE_NAME);
+              Navigator.pushNamed(context, WatchlistPage.ROUTE_NAME);
             },
           ),
           ListTile(

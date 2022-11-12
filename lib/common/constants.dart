@@ -45,3 +45,7 @@ const kColorScheme = ColorScheme(
   onError: Colors.white,
   brightness: Brightness.dark,
 );
+
+// String
+const watchlistAddSuccessMessage = 'Added to Watchlist';
+const watchlistRemoveSuccessMessage = 'Removed from Watchlist';
