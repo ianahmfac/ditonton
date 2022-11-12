@@ -2,9 +2,9 @@ import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
 import '../../common/constants.dart';
+import '../../common/state_enum.dart';
 import '../provider/popular_movies_notifier.dart';
 import '../widgets/movie_tv_card.dart';
-import '../widgets/state_widget_builder.dart';
 import 'movie_detail_page.dart';
 
 class PopularMoviesPage extends StatefulWidget {
@@ -32,30 +32,31 @@ class _PopularMoviesPageState extends State<PopularMoviesPage> {
         padding: const EdgeInsets.all(8.0),
         child: Consumer<PopularMoviesNotifier>(
           builder: (context, data, child) {
-            return StateWidgetBuilder(
-              state: data.state,
-              loadedWidget: (context) {
-                return ListView.builder(
-                  itemBuilder: (context, index) {
-                    final movie = data.movies[index];
-                    return MovieTvCard(
-                      onTap: () {
-                        Navigator.pushNamed(
-                          context,
-                          MovieDetailPage.ROUTE_NAME,
-                          arguments: movie.id,
-                        );
-                      },
-                      title: movie.title ?? '-',
-                      overview: movie.overview ?? '-',
-                      posterPath: '$BASE_IMAGE_URL/${movie.posterPath}',
-                    );
-                  },
-                  itemCount: data.movies.length,
-                );
-              },
-              errorMessage: data.message,
-            );
+            if (data.state == RequestState.Loading) {
+              return Center(
+                child: CircularProgressIndicator(),
+              );
+            } else if (data.state == RequestState.Loaded) {
+              return ListView.builder(
+                itemBuilder: (context, index) {
+                  final movie = data.movies[index];
+                  return MovieTvCard(
+                    onTap: () {
+                      Navigator.pushNamed(context, MovieDetailPage.ROUTE_NAME, arguments: movie.id);
+                    },
+                    title: movie.title ?? '',
+                    overview: movie.overview ?? '',
+                    posterPath: '$BASE_IMAGE_URL/${movie.posterPath}',
+                  );
+                },
+                itemCount: data.movies.length,
+              );
+            } else {
+              return Center(
+                key: Key('error_message'),
+                child: Text(data.message),
+              );
+            }
           },
         ),
       ),

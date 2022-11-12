@@ -30,6 +30,7 @@ class StateWidgetBuilder extends StatelessWidget {
         return errorWidget != null
             ? errorWidget!.call(context)
             : Center(
+                key: Key('error_message'),
                 child: Text(errorMessage ?? ''),
               );
       case RequestState.Loaded:
