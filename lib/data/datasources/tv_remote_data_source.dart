@@ -74,7 +74,6 @@ class TvRemoteDataSourceImpl extends TvRemoteDataSource {
   @override
   Future<List<TvSeriesModel>> searchTvSeries(String query) async {
     final response = await client.get(Uri.parse('$BASE_URL/search/tv?query=$query&$API_KEY'));
-    print('CEK => ${response.body}');
     if (response.statusCode == 200) {
       return TvSeriesResponse.fromJson(jsonDecode(response.body)).results;
     } else {
