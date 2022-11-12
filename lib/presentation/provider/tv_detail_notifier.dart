@@ -89,21 +89,21 @@ class TvDetailNotifier extends ChangeNotifier {
     notifyListeners();
   }
 
-  Future<void> addWatchlist() async {
-    final result = await saveWatchlistTv.execute(_tvDetail);
+  Future<void> addWatchlist(TvDetail tv) async {
+    final result = await saveWatchlistTv.execute(tv);
     result.fold(
       (failure) => _watchlistMessage = failure.message,
       (success) => _watchlistMessage = success,
     );
-    loadWatchlistStatus(_tvDetail.id);
+    await loadWatchlistStatus(tv.id);
   }
 
-  Future<void> removeWatchList() async {
-    final result = await removeWatchListTv.execute(_tvDetail);
+  Future<void> removeWatchList(TvDetail tv) async {
+    final result = await removeWatchListTv.execute(tv);
     result.fold(
       (failure) => _watchlistMessage = failure.message,
       (success) => _watchlistMessage = success,
     );
-    loadWatchlistStatus(_tvDetail.id);
+    await loadWatchlistStatus(tv.id);
   }
 }

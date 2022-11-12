@@ -130,9 +130,11 @@ class _TvDetailContent extends StatelessWidget {
                               ElevatedButton(
                                 onPressed: () async {
                                   if (isOnWatchList) {
-                                    await context.read<TvDetailNotifier>().removeWatchList();
+                                    await context
+                                        .read<TvDetailNotifier>()
+                                        .removeWatchList(tvDetail);
                                   } else {
-                                    await context.read<TvDetailNotifier>().addWatchlist();
+                                    await context.read<TvDetailNotifier>().addWatchlist(tvDetail);
                                   }
 
                                   final message = context.read<TvDetailNotifier>().watchlistMessage;

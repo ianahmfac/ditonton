@@ -89,6 +89,7 @@ class TvSeriesListNotifier extends ChangeNotifier {
       (tvSeries) {
         _topRatedState = RequestState.Loaded;
         _topRates.addAll(tvSeries);
+        notifyListeners();
       },
     );
   }

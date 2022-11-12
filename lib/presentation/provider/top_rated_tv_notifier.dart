@@ -34,6 +34,7 @@ class TopRatedTvNotifier extends ChangeNotifier {
         if (init) {
           _state = RequestState.Error;
           _message = failure.message;
+          notifyListeners();
         }
       },
       (tv) {
