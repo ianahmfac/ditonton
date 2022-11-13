@@ -8,6 +8,7 @@ import '../widgets/home_app_bar.dart';
 import '../widgets/home_list_widget.dart';
 import '../widgets/home_sub_heading.dart';
 import '../widgets/state_widget_builder.dart';
+import 'now_playing_tv_page.dart';
 import 'popular_tv_page.dart';
 import 'search_tv_page.dart';
 import 'top_rated_tv_page.dart';
@@ -50,7 +51,10 @@ class _HomeTvPageState extends State<HomeTvPage> {
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-              HomeSubHeading(title: 'Now Airing'),
+              HomeSubHeading(
+                title: 'Now Airing',
+                onTap: () => Navigator.pushNamed(context, NowPlayingTvPage.ROUTE_NAME),
+              ),
               Consumer<TvSeriesListNotifier>(
                 builder: (context, notifier, child) {
                   final state = notifier.nowPlayingState;

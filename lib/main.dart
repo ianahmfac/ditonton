@@ -9,6 +9,7 @@ import 'presentation/pages/about_page.dart';
 import 'presentation/pages/home_movie_page.dart';
 import 'presentation/pages/home_tv_page.dart';
 import 'presentation/pages/movie_detail_page.dart';
+import 'presentation/pages/now_playing_tv_page.dart';
 import 'presentation/pages/popular_movies_page.dart';
 import 'presentation/pages/popular_tv_page.dart';
 import 'presentation/pages/search_page.dart';
@@ -20,6 +21,7 @@ import 'presentation/pages/watchlist_page.dart';
 import 'presentation/provider/movie_detail_notifier.dart';
 import 'presentation/provider/movie_list_notifier.dart';
 import 'presentation/provider/movie_search_notifier.dart';
+import 'presentation/provider/now_playing_tv_notifier.dart';
 import 'presentation/provider/popular_movies_notifier.dart';
 import 'presentation/provider/popular_tv_notifier.dart';
 import 'presentation/provider/top_rated_movies_notifier.dart';
@@ -68,6 +70,9 @@ class MyApp extends StatelessWidget {
         ChangeNotifierProvider(
           create: (context) => di.locator<WatchListTvNotifier>(),
         ),
+        ChangeNotifierProvider(
+          create: (context) => di.locator<NowPlayingTvNotifier>(),
+        ),
       ],
       child: MaterialApp(
         title: 'Flutter Demo',
@@ -112,6 +117,8 @@ class MyApp extends StatelessWidget {
               );
             case SearchTvPage.ROUTE_NAME:
               return MaterialPageRoute(builder: (_) => SearchTvPage());
+            case NowPlayingTvPage.ROUTE_NAME:
+              return MaterialPageRoute(builder: (_) => NowPlayingTvPage());
             default:
               return MaterialPageRoute(builder: (_) {
                 return Scaffold(

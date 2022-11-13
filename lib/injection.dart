@@ -33,6 +33,7 @@ import 'domain/usecases/search_tv_series.dart';
 import 'presentation/provider/movie_detail_notifier.dart';
 import 'presentation/provider/movie_list_notifier.dart';
 import 'presentation/provider/movie_search_notifier.dart';
+import 'presentation/provider/now_playing_tv_notifier.dart';
 import 'presentation/provider/popular_movies_notifier.dart';
 import 'presentation/provider/popular_tv_notifier.dart';
 import 'presentation/provider/top_rated_movies_notifier.dart';
@@ -101,6 +102,7 @@ void init() {
       ));
   locator.registerFactory(() => TvSearchNotifier(searchTvSeries: locator()));
   locator.registerFactory(() => WatchListTvNotifier(getWatchListTv: locator()));
+  locator.registerFactory(() => NowPlayingTvNotifier(getNowPlayingTvSeries: locator()));
 
   // use case
   locator.registerLazySingleton(() => GetNowPlayingMovies(locator()));
