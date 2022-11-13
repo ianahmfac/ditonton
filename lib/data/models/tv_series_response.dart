@@ -10,14 +10,6 @@ class TvSeriesResponse extends Equatable {
   @override
   List<Object> get props => [results];
 
-  TvSeriesResponse copyWith({
-    List<TvSeriesModel>? results,
-  }) {
-    return TvSeriesResponse(
-      results: results ?? this.results,
-    );
-  }
-
   Map<String, dynamic> toJson() {
     return {
       'results': results.map((x) => x.toJson()).toList(),

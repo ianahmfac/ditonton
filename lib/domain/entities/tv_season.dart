@@ -27,22 +27,4 @@ class TvSeason extends Equatable {
       episodeCount,
     ];
   }
-
-  TvSeason copyWith({
-    int? id,
-    String? name,
-    String? overview,
-    String? posterPath,
-    int? seasonNumber,
-    int? episodeCount,
-  }) {
-    return TvSeason(
-      id: id ?? this.id,
-      name: name ?? this.name,
-      overview: overview ?? this.overview,
-      posterPath: posterPath ?? this.posterPath,
-      seasonNumber: seasonNumber ?? this.seasonNumber,
-      episodeCount: episodeCount ?? this.episodeCount,
-    );
-  }
 }

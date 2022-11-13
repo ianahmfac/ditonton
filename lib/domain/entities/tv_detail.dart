@@ -54,30 +54,4 @@ class TvDetail extends Equatable {
       nextEpisode,
     ];
   }
-
-  TvDetail copyWith({
-    int? id,
-    String? name,
-    String? overview,
-    List<Genre>? genres,
-    String? posterPath,
-    double? voteAverage,
-    int? voteCount,
-    List<TvSeason>? seasons,
-    TvEpisode? lastEpisode,
-    TvEpisode? nextEpisode,
-  }) {
-    return TvDetail(
-      id: id ?? this.id,
-      name: name ?? this.name,
-      overview: overview ?? this.overview,
-      genres: genres ?? this.genres,
-      posterPath: posterPath ?? this.posterPath,
-      voteAverage: voteAverage ?? this.voteAverage,
-      voteCount: voteCount ?? this.voteCount,
-      seasons: seasons ?? this.seasons,
-      lastEpisode: lastEpisode ?? this.lastEpisode,
-      nextEpisode: nextEpisode ?? this.nextEpisode,
-    );
-  }
 }

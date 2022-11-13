@@ -31,24 +31,6 @@ class TvSeasonModel extends Equatable {
     ];
   }
 
-  TvSeasonModel copyWith({
-    int? id,
-    String? name,
-    String? overview,
-    String? posterPath,
-    int? seasonNumber,
-    int? episodeCount,
-  }) {
-    return TvSeasonModel(
-      id: id ?? this.id,
-      name: name ?? this.name,
-      overview: overview ?? this.overview,
-      posterPath: posterPath ?? this.posterPath,
-      seasonNumber: seasonNumber ?? this.seasonNumber,
-      episodeCount: episodeCount ?? this.episodeCount,
-    );
-  }
-
   Map<String, dynamic> toJson() {
     return {
       'id': id,

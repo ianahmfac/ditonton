@@ -47,32 +47,6 @@ class TvDetailModel extends Equatable {
     ];
   }
 
-  TvDetailModel copyWith({
-    int? id,
-    String? name,
-    String? overview,
-    List<GenreModel>? genres,
-    String? posterPath,
-    double? voteAverage,
-    int? voteCount,
-    List<TvSeasonModel>? seasons,
-    TvEpisodeModel? lastEpisode,
-    TvEpisodeModel? nextEpisode,
-  }) {
-    return TvDetailModel(
-      id: id ?? this.id,
-      name: name ?? this.name,
-      overview: overview ?? this.overview,
-      genres: genres ?? this.genres,
-      posterPath: posterPath ?? this.posterPath,
-      voteAverage: voteAverage ?? this.voteAverage,
-      voteCount: voteCount ?? this.voteCount,
-      seasons: seasons ?? this.seasons,
-      lastEpisode: lastEpisode ?? this.lastEpisode,
-      nextEpisode: nextEpisode ?? this.nextEpisode,
-    );
-  }
-
   Map<String, dynamic> toJson() {
     return {
       'id': id,

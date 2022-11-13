@@ -29,22 +29,6 @@ class TvSeriesModel extends Equatable {
     ];
   }
 
-  TvSeriesModel copyWith({
-    int? id,
-    String? name,
-    String? overview,
-    String? backdropPath,
-    String? posterPath,
-  }) {
-    return TvSeriesModel(
-      id: id ?? this.id,
-      name: name ?? this.name,
-      overview: overview ?? this.overview,
-      backdropPath: backdropPath ?? this.backdropPath,
-      posterPath: posterPath ?? this.posterPath,
-    );
-  }
-
   Map<String, dynamic> toJson() {
     return {
       'id': id,

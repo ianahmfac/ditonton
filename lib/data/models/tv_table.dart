@@ -19,20 +19,6 @@ class TvTable extends Equatable {
   @override
   List<Object?> get props => [id, title, posterPath, overview];
 
-  TvTable copyWith({
-    int? id,
-    String? title,
-    String? posterPath,
-    String? overview,
-  }) {
-    return TvTable(
-      id: id ?? this.id,
-      title: title ?? this.title,
-      posterPath: posterPath ?? this.posterPath,
-      overview: overview ?? this.overview,
-    );
-  }
-
   Map<String, dynamic> toJson() {
     return {
       'id': id,
