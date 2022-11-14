@@ -1,6 +1,6 @@
+import 'package:about/about.dart';
 import 'package:flutter/material.dart';
 
-import '../pages/about_page.dart';
 import '../pages/watchlist_page.dart';
 
 class AppDrawer extends StatelessWidget {
@@ -43,7 +43,7 @@ class AppDrawer extends StatelessWidget {
           ),
           ListTile(
             onTap: () {
-              Navigator.pushNamed(context, AboutPage.ROUTE_NAME);
+              Navigator.pushNamed(context, AboutPage.routeName);
             },
             leading: Icon(Icons.info_outline),
             title: Text('About'),
