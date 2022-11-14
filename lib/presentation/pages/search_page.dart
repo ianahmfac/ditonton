@@ -1,8 +1,7 @@
+import 'package:core/core.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
-import '../../common/constants.dart';
-import '../../common/state_enum.dart';
 import '../provider/movie_search_notifier.dart';
 import '../widgets/movie_tv_card.dart';
 import 'movie_detail_page.dart';
@@ -40,11 +39,11 @@ class SearchPage extends StatelessWidget {
             ),
             Consumer<MovieSearchNotifier>(
               builder: (context, data, child) {
-                if (data.state == RequestState.Loading) {
+                if (data.state == RequestState.loading) {
                   return Center(
                     child: CircularProgressIndicator(),
                   );
-                } else if (data.state == RequestState.Loaded) {
+                } else if (data.state == RequestState.loaded) {
                   final result = data.searchResult;
                   return Expanded(
                     child: ListView.builder(
@@ -61,7 +60,7 @@ class SearchPage extends StatelessWidget {
                           },
                           title: movie.title ?? '-',
                           overview: movie.overview ?? '-',
-                          posterPath: '$BASE_IMAGE_URL/${movie.posterPath}',
+                          posterPath: '$baseImageUrl/${movie.posterPath}',
                         );
                       },
                       itemCount: result.length,

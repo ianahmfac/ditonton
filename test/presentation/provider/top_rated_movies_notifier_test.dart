@@ -1,6 +1,5 @@
+import 'package:core/core.dart';
 import 'package:dartz/dartz.dart';
-import 'package:ditonton/common/failure.dart';
-import 'package:ditonton/common/state_enum.dart';
 import 'package:ditonton/domain/entities/movie.dart';
 import 'package:ditonton/domain/usecases/get_top_rated_movies.dart';
 import 'package:ditonton/presentation/provider/top_rated_movies_notifier.dart';
@@ -45,23 +44,21 @@ void main() {
 
   test('should change state to loading when usecase is called', () async {
     // arrange
-    when(mockGetTopRatedMovies.execute())
-        .thenAnswer((_) async => Right(tMovieList));
+    when(mockGetTopRatedMovies.execute()).thenAnswer((_) async => Right(tMovieList));
     // act
     notifier.fetchTopRatedMovies();
     // assert
-    expect(notifier.state, RequestState.Loading);
+    expect(notifier.state, RequestState.loading);
     expect(listenerCallCount, 1);
   });
 
   test('should change movies data when data is gotten successfully', () async {
     // arrange
-    when(mockGetTopRatedMovies.execute())
-        .thenAnswer((_) async => Right(tMovieList));
+    when(mockGetTopRatedMovies.execute()).thenAnswer((_) async => Right(tMovieList));
     // act
     await notifier.fetchTopRatedMovies();
     // assert
-    expect(notifier.state, RequestState.Loaded);
+    expect(notifier.state, RequestState.loaded);
     expect(notifier.movies, tMovieList);
     expect(listenerCallCount, 2);
   });
@@ -73,7 +70,7 @@ void main() {
     // act
     await notifier.fetchTopRatedMovies();
     // assert
-    expect(notifier.state, RequestState.Error);
+    expect(notifier.state, RequestState.error);
     expect(notifier.message, 'Server Failure');
     expect(listenerCallCount, 2);
   });

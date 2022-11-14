@@ -1,6 +1,5 @@
+import 'package:core/core.dart';
 import 'package:dartz/dartz.dart';
-import 'package:ditonton/common/failure.dart';
-import 'package:ditonton/common/state_enum.dart';
 import 'package:ditonton/domain/usecases/get_watchlist_tv.dart';
 import 'package:ditonton/presentation/provider/watchlist_tv_notifier.dart';
 import 'package:flutter_test/flutter_test.dart';
@@ -32,7 +31,7 @@ void main() {
     // act
     await provider.fetchWatchList();
     // assert
-    expect(provider.state, RequestState.Loaded);
+    expect(provider.state, RequestState.loaded);
     expect(provider.watchlists, [testWatchlistTv]);
     expect(listenerCallCount, 2);
   });
@@ -44,7 +43,7 @@ void main() {
     // act
     await provider.fetchWatchList();
     // assert
-    expect(provider.state, RequestState.Error);
+    expect(provider.state, RequestState.error);
     expect(provider.message, "Can't get data");
     expect(listenerCallCount, 2);
   });

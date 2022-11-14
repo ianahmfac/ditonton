@@ -1,6 +1,5 @@
+import 'package:core/core.dart';
 import 'package:flutter/material.dart';
-
-import '../../common/constants.dart';
 
 class HomeSubHeading extends StatelessWidget {
   final String title;

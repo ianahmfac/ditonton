@@ -1,6 +1,6 @@
 import 'dart:convert';
 
-import 'package:ditonton/common/constants.dart';
+import 'package:core/core.dart';
 import 'package:ditonton/data/models/tv_series_model.dart';
 import 'package:ditonton/data/models/tv_series_response.dart';
 import 'package:flutter_test/flutter_test.dart';
@@ -9,10 +9,10 @@ import '../../json_reader.dart';
 
 void main() {
   final tTvModel = TvSeriesModel(
-    backdropPath: '$BASE_IMAGE_URL/path.jpg',
+    backdropPath: '$baseImageUrl/path.jpg',
     id: 1,
     overview: 'Overview',
-    posterPath: '$BASE_IMAGE_URL/path.jpg',
+    posterPath: '$baseImageUrl/path.jpg',
     name: 'Title',
   );
 
@@ -38,10 +38,10 @@ void main() {
       final expectedJsonMap = {
         "results": [
           {
-            "backdrop_path": "$BASE_IMAGE_URL/path.jpg",
+            "backdrop_path": "$baseImageUrl/path.jpg",
             "id": 1,
             "overview": "Overview",
-            "poster_path": "$BASE_IMAGE_URL/path.jpg",
+            "poster_path": "$baseImageUrl/path.jpg",
             "name": "Title"
           }
         ],

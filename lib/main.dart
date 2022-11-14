@@ -1,9 +1,9 @@
 import 'package:about/about.dart';
+import 'package:core/core.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
-import 'common/constants.dart';
 import 'common/utils.dart';
 import 'injection.dart' as di;
 import 'presentation/pages/home_movie_page.dart';

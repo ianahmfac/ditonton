@@ -1,6 +1,6 @@
+import 'package:core/core.dart';
 import 'package:flutter/foundation.dart';
 
-import '../../common/state_enum.dart';
 import '../../domain/entities/tv_series.dart';
 import '../../domain/usecases/search_tv_series.dart';
 
@@ -9,7 +9,7 @@ class TvSearchNotifier extends ChangeNotifier {
 
   TvSearchNotifier({required this.searchTvSeries});
 
-  RequestState _state = RequestState.Empty;
+  RequestState _state = RequestState.empty;
   RequestState get state => _state;
 
   List<TvSeries> _searchResult = [];
@@ -20,19 +20,19 @@ class TvSearchNotifier extends ChangeNotifier {
 
   Future<void> fetchTvSearch(String query) async {
     _searchResult.clear();
-    _state = RequestState.Loading;
+    _state = RequestState.loading;
     notifyListeners();
 
     final result = await searchTvSeries.execute(query);
     result.fold(
       (failure) {
         _message = failure.message;
-        _state = RequestState.Error;
+        _state = RequestState.error;
         notifyListeners();
       },
       (data) {
         _searchResult.addAll(data);
-        _state = RequestState.Loaded;
+        _state = RequestState.loaded;
         notifyListeners();
       },
     );

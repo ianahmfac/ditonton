@@ -1,6 +1,6 @@
+import 'package:core/core.dart';
 import 'package:flutter/material.dart';
 
-import '../../common/state_enum.dart';
 import '../../domain/entities/tv_series.dart';
 import '../../domain/usecases/get_now_playing_tv_series.dart';
 import '../../domain/usecases/get_popular_tv_series.dart';
@@ -19,37 +19,37 @@ class TvSeriesListNotifier extends ChangeNotifier {
   List<TvSeries> _nowPlayings = [];
   List<TvSeries> get nowPlayings => _nowPlayings;
 
-  RequestState _nowPlayingState = RequestState.Empty;
+  RequestState _nowPlayingState = RequestState.empty;
   RequestState get nowPlayingState => _nowPlayingState;
 
   List<TvSeries> _populars = [];
   List<TvSeries> get populars => _populars;
 
-  RequestState _popularState = RequestState.Empty;
+  RequestState _popularState = RequestState.empty;
   RequestState get popularState => _popularState;
 
   List<TvSeries> _topRates = [];
   List<TvSeries> get topRates => _topRates;
 
-  RequestState _topRatedState = RequestState.Empty;
+  RequestState _topRatedState = RequestState.empty;
   RequestState get topRatedState => _topRatedState;
 
   String _message = '';
   String get message => _message;
 
   Future<void> fetchNowPlayingTvSeries() async {
-    _nowPlayingState = RequestState.Loading;
+    _nowPlayingState = RequestState.loading;
     notifyListeners();
 
     final result = await getNowPlayingTvSeries.execute();
     result.fold(
       (failure) {
-        _nowPlayingState = RequestState.Error;
+        _nowPlayingState = RequestState.error;
         _message = failure.message;
         notifyListeners();
       },
       (tvSeries) {
-        _nowPlayingState = RequestState.Loaded;
+        _nowPlayingState = RequestState.loaded;
         _nowPlayings.addAll(tvSeries);
         notifyListeners();
       },
@@ -57,18 +57,18 @@ class TvSeriesListNotifier extends ChangeNotifier {
   }
 
   Future<void> fetchPopularTvSeries() async {
-    _popularState = RequestState.Loading;
+    _popularState = RequestState.loading;
     notifyListeners();
 
     final result = await getPopularTvSeries.execute(1);
     result.fold(
       (failure) {
-        _popularState = RequestState.Error;
+        _popularState = RequestState.error;
         _message = failure.message;
         notifyListeners();
       },
       (tvSeries) {
-        _popularState = RequestState.Loaded;
+        _popularState = RequestState.loaded;
         _populars.addAll(tvSeries);
         notifyListeners();
       },
@@ -76,18 +76,18 @@ class TvSeriesListNotifier extends ChangeNotifier {
   }
 
   Future<void> fetchTopRatedTvSeries() async {
-    _topRatedState = RequestState.Loading;
+    _topRatedState = RequestState.loading;
     notifyListeners();
 
     final result = await getTopRatedTvSeries.execute(1);
     result.fold(
       (failure) {
-        _topRatedState = RequestState.Error;
+        _topRatedState = RequestState.error;
         _message = failure.message;
         notifyListeners();
       },
       (tvSeries) {
-        _topRatedState = RequestState.Loaded;
+        _topRatedState = RequestState.loaded;
         _topRates.addAll(tvSeries);
         notifyListeners();
       },

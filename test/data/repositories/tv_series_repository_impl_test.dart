@@ -1,10 +1,8 @@
 import 'dart:io';
 
+import 'package:core/core.dart';
 import 'package:dartz/dartz.dart';
-import 'package:ditonton/common/constants.dart';
 import 'package:ditonton/data/models/genre_model.dart';
-import 'package:ditonton/common/exception.dart';
-import 'package:ditonton/common/failure.dart';
 import 'package:ditonton/data/models/tv_detail_model.dart';
 import 'package:ditonton/data/models/tv_episode_model.dart';
 import 'package:ditonton/data/models/tv_season_model.dart';
@@ -32,20 +30,20 @@ void main() {
   });
 
   final tTvModel = TvSeriesModel(
-    backdropPath: '$BASE_IMAGE_URL/muth4OYamXf41G2evdrLEg8d3om.jpg',
+    backdropPath: '$baseImageUrl/muth4OYamXf41G2evdrLEg8d3om.jpg',
     id: 557,
     overview:
         'After being bitten by a genetically altered spider, nerdy high school student Peter Parker is endowed with amazing powers to become the Amazing superhero known as Spider-Man.',
-    posterPath: '$BASE_IMAGE_URL/rweIrveL43TaxUN0akQEaAXL6x0.jpg',
+    posterPath: '$baseImageUrl/rweIrveL43TaxUN0akQEaAXL6x0.jpg',
     name: 'Spider-Man',
   );
 
   final tTv = TvSeries(
-    backdropPath: '$BASE_IMAGE_URL/muth4OYamXf41G2evdrLEg8d3om.jpg',
+    backdropPath: '$baseImageUrl/muth4OYamXf41G2evdrLEg8d3om.jpg',
     id: 557,
     overview:
         'After being bitten by a genetically altered spider, nerdy high school student Peter Parker is endowed with amazing powers to become the Amazing superhero known as Spider-Man.',
-    posterPath: '$BASE_IMAGE_URL/rweIrveL43TaxUN0akQEaAXL6x0.jpg',
+    posterPath: '$baseImageUrl/rweIrveL43TaxUN0akQEaAXL6x0.jpg',
     name: 'Spider-Man',
   );
 
@@ -158,7 +156,7 @@ void main() {
       genres: [GenreModel(id: 1, name: 'Action')],
       id: 1,
       overview: 'overview',
-      posterPath: '$BASE_IMAGE_URL/posterPath',
+      posterPath: '$baseImageUrl/posterPath',
       name: 'title',
       voteAverage: 1,
       voteCount: 1,
@@ -166,14 +164,14 @@ void main() {
         id: 11,
         name: 'epsName',
         overview: 'overview',
-        stillPath: '$BASE_IMAGE_URL/stillPath',
+        stillPath: '$baseImageUrl/stillPath',
         episodeNumber: 1,
       ),
       nextEpisode: TvEpisodeModel(
         id: 11,
         name: 'epsName',
         overview: 'overview',
-        stillPath: '$BASE_IMAGE_URL/stillPath',
+        stillPath: '$baseImageUrl/stillPath',
         episodeNumber: 1,
       ),
       seasons: [
@@ -181,7 +179,7 @@ void main() {
           id: 21,
           name: 'seasonName',
           overview: 'overview',
-          posterPath: '$BASE_IMAGE_URL/posterPath',
+          posterPath: '$baseImageUrl/posterPath',
           seasonNumber: 1,
           episodeCount: 1,
         ),

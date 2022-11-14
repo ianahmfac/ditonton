@@ -1,12 +1,11 @@
+import 'package:core/core.dart';
 import 'package:dartz/dartz.dart';
-import 'package:ditonton/common/failure.dart';
 import 'package:ditonton/domain/entities/tv_series.dart';
 import 'package:ditonton/domain/usecases/get_tv_detail.dart';
 import 'package:ditonton/domain/usecases/get_tv_detail_recommendation.dart';
 import 'package:ditonton/domain/usecases/get_watchlist_tv_status.dart';
 import 'package:ditonton/domain/usecases/remove_watchlist_tv.dart';
 import 'package:ditonton/domain/usecases/save_watchlist_tv.dart';
-import 'package:ditonton/common/state_enum.dart';
 import 'package:ditonton/presentation/provider/tv_detail_notifier.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:mockito/annotations.dart';
@@ -76,7 +75,7 @@ void main() {
       // act
       provider.fetchDetail(tId);
       // assert
-      expect(provider.detailState, RequestState.Loading);
+      expect(provider.detailState, RequestState.loading);
       expect(listenerCallCount, 1);
     });
 
@@ -86,7 +85,7 @@ void main() {
       // act
       await provider.fetchDetail(tId);
       // assert
-      expect(provider.detailState, RequestState.Loaded);
+      expect(provider.detailState, RequestState.loaded);
       expect(provider.tvDetail, testTvDetail);
       expect(listenerCallCount, 2);
     });
@@ -109,7 +108,7 @@ void main() {
       // act
       await provider.fetchRecommendations(tId);
       // assert
-      expect(provider.recommendationState, RequestState.Loaded);
+      expect(provider.recommendationState, RequestState.loaded);
       expect(provider.recommendations, tTvList);
     });
 
@@ -120,7 +119,7 @@ void main() {
       // act
       await provider.fetchRecommendations(tId);
       // assert
-      expect(provider.recommendationState, RequestState.Error);
+      expect(provider.recommendationState, RequestState.error);
       expect(provider.message, 'Failed');
     });
   });
@@ -191,7 +190,7 @@ void main() {
       // act
       await provider.fetchDetail(tId);
       // assert
-      expect(provider.detailState, RequestState.Error);
+      expect(provider.detailState, RequestState.error);
       expect(provider.message, 'Server Failure');
       expect(listenerCallCount, 2);
     });

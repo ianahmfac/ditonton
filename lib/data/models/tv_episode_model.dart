@@ -1,6 +1,6 @@
+import 'package:core/core.dart';
 import 'package:equatable/equatable.dart';
 
-import '../../common/constants.dart';
 import '../../domain/entities/tv_episode.dart';
 
 class TvEpisodeModel extends Equatable {
@@ -43,7 +43,7 @@ class TvEpisodeModel extends Equatable {
       id: json['id']?.toInt() ?? 0,
       name: json['name'] ?? '',
       overview: json['overview'] ?? '',
-      stillPath: json['still_path'] != null ? '$BASE_IMAGE_URL${json['still_path']}' : null,
+      stillPath: json['still_path'] != null ? '$baseImageUrl${json['still_path']}' : null,
       episodeNumber: json['episode_number']?.toInt() ?? 0,
     );
   }

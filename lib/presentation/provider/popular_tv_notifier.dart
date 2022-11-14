@@ -1,6 +1,6 @@
+import 'package:core/core.dart';
 import 'package:flutter/material.dart';
 
-import '../../common/state_enum.dart';
 import '../../domain/entities/tv_series.dart';
 import '../../domain/usecases/get_popular_tv_series.dart';
 
@@ -15,7 +15,7 @@ class PopularTvNotifier extends ChangeNotifier {
 
   int _page = 1;
 
-  RequestState _state = RequestState.Empty;
+  RequestState _state = RequestState.empty;
   RequestState get state => _state;
 
   String _message = '';
@@ -24,7 +24,7 @@ class PopularTvNotifier extends ChangeNotifier {
   Future<void> fetchPopularTvSeries({bool init = true}) async {
     if (init) {
       _page = 1;
-      _state = RequestState.Loading;
+      _state = RequestState.loading;
       _tvSeries.clear();
       notifyListeners();
     }
@@ -32,13 +32,13 @@ class PopularTvNotifier extends ChangeNotifier {
     result.fold(
       (failure) {
         if (init) {
-          _state = RequestState.Error;
+          _state = RequestState.error;
           _message = failure.message;
           notifyListeners();
         }
       },
       (tv) {
-        _state = RequestState.Loaded;
+        _state = RequestState.loaded;
         _tvSeries.addAll(tv);
         if (tv.isNotEmpty) {
           _page++;

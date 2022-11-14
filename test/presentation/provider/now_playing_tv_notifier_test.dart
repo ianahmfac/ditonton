@@ -1,6 +1,5 @@
+import 'package:core/core.dart';
 import 'package:dartz/dartz.dart';
-import 'package:ditonton/common/failure.dart';
-import 'package:ditonton/common/state_enum.dart';
 import 'package:ditonton/domain/entities/tv_series.dart';
 import 'package:ditonton/domain/usecases/get_now_playing_tv_series.dart';
 import 'package:ditonton/presentation/provider/now_playing_tv_notifier.dart';
@@ -40,7 +39,7 @@ void main() {
     // act
     notifier.fetchNowPlaying();
     // assert
-    expect(notifier.state, RequestState.Loading);
+    expect(notifier.state, RequestState.loading);
     expect(listenerCallCount, 1);
   });
 
@@ -50,7 +49,7 @@ void main() {
     // act
     await notifier.fetchNowPlaying();
     // assert
-    expect(notifier.state, RequestState.Loaded);
+    expect(notifier.state, RequestState.loaded);
     expect(notifier.tvSeries, tTvList);
     expect(listenerCallCount, 2);
   });
@@ -62,7 +61,7 @@ void main() {
     // act
     await notifier.fetchNowPlaying();
     // assert
-    expect(notifier.state, RequestState.Error);
+    expect(notifier.state, RequestState.error);
     expect(notifier.message, 'Server Failure');
     expect(listenerCallCount, 2);
   });

@@ -1,6 +1,5 @@
+import 'package:core/core.dart';
 import 'package:dartz/dartz.dart';
-import 'package:ditonton/common/failure.dart';
-import 'package:ditonton/common/state_enum.dart';
 import 'package:ditonton/domain/entities/movie.dart';
 import 'package:ditonton/domain/usecases/search_movies.dart';
 import 'package:ditonton/presentation/provider/movie_search_notifier.dart';
@@ -47,23 +46,20 @@ void main() {
   group('search movies', () {
     test('should change state to loading when usecase is called', () async {
       // arrange
-      when(mockSearchMovies.execute(tQuery))
-          .thenAnswer((_) async => Right(tMovieList));
+      when(mockSearchMovies.execute(tQuery)).thenAnswer((_) async => Right(tMovieList));
       // act
       provider.fetchMovieSearch(tQuery);
       // assert
-      expect(provider.state, RequestState.Loading);
+      expect(provider.state, RequestState.loading);
     });
 
-    test('should change search result data when data is gotten successfully',
-        () async {
+    test('should change search result data when data is gotten successfully', () async {
       // arrange
-      when(mockSearchMovies.execute(tQuery))
-          .thenAnswer((_) async => Right(tMovieList));
+      when(mockSearchMovies.execute(tQuery)).thenAnswer((_) async => Right(tMovieList));
       // act
       await provider.fetchMovieSearch(tQuery);
       // assert
-      expect(provider.state, RequestState.Loaded);
+      expect(provider.state, RequestState.loaded);
       expect(provider.searchResult, tMovieList);
       expect(listenerCallCount, 2);
     });
@@ -75,7 +71,7 @@ void main() {
       // act
       await provider.fetchMovieSearch(tQuery);
       // assert
-      expect(provider.state, RequestState.Error);
+      expect(provider.state, RequestState.error);
       expect(provider.message, 'Server Failure');
       expect(listenerCallCount, 2);
     });

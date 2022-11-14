@@ -1,8 +1,7 @@
+import 'package:core/core.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
-import '../../common/constants.dart';
-import '../../common/state_enum.dart';
 import '../../common/utils.dart';
 import '../provider/watchlist_movie_notifier.dart';
 import '../provider/watchlist_tv_notifier.dart';
@@ -77,11 +76,11 @@ class _WatchlistPageState extends State<WatchlistPage> with RouteAware {
   Widget _buildMovieWatchlist() {
     return Consumer<WatchlistMovieNotifier>(
       builder: (context, data, child) {
-        if (data.watchlistState == RequestState.Loading) {
+        if (data.watchlistState == RequestState.loading) {
           return Center(
             child: CircularProgressIndicator(),
           );
-        } else if (data.watchlistState == RequestState.Loaded) {
+        } else if (data.watchlistState == RequestState.loaded) {
           return ListView.builder(
             itemBuilder: (context, index) {
               final movie = data.watchlistMovies[index];
@@ -95,7 +94,7 @@ class _WatchlistPageState extends State<WatchlistPage> with RouteAware {
                 },
                 title: movie.title ?? '-',
                 overview: movie.overview ?? '-',
-                posterPath: '$BASE_IMAGE_URL/${movie.posterPath}',
+                posterPath: '$baseImageUrl/${movie.posterPath}',
               );
             },
             itemCount: data.watchlistMovies.length,

@@ -1,6 +1,5 @@
+import 'package:core/core.dart';
 import 'package:flutter/material.dart';
-
-import '../../common/state_enum.dart';
 
 class StateWidgetBuilder extends StatelessWidget {
   final RequestState state;
@@ -20,20 +19,20 @@ class StateWidgetBuilder extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     switch (state) {
-      case RequestState.Loading:
+      case RequestState.loading:
         return loadingWidget != null
             ? loadingWidget!.call(context)
             : Center(
                 child: CircularProgressIndicator(),
               );
-      case RequestState.Error:
+      case RequestState.error:
         return errorWidget != null
             ? errorWidget!.call(context)
             : Center(
                 key: Key('error_message'),
                 child: Text(errorMessage ?? ''),
               );
-      case RequestState.Loaded:
+      case RequestState.loaded:
         return loadedWidget.call(context);
       default:
         return const SizedBox();

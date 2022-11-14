@@ -6,7 +6,7 @@
 import 'dart:async' as _i11;
 import 'dart:ui' as _i12;
 
-import 'package:ditonton/common/state_enum.dart' as _i9;
+import 'package:core/core.dart' as _i9;
 import 'package:ditonton/domain/entities/movie.dart' as _i10;
 import 'package:ditonton/domain/entities/movie_detail.dart' as _i7;
 import 'package:ditonton/domain/usecases/get_movie_detail.dart' as _i2;
@@ -109,7 +109,7 @@ class MockMovieDetailNotifier extends _i1.Mock
   @override
   _i9.RequestState get movieState =>
       (super.noSuchMethod(Invocation.getter(#movieState),
-          returnValue: _i9.RequestState.Empty) as _i9.RequestState);
+          returnValue: _i9.RequestState.empty) as _i9.RequestState);
   @override
   List<_i10.Movie> get movieRecommendations =>
       (super.noSuchMethod(Invocation.getter(#movieRecommendations),
@@ -117,7 +117,7 @@ class MockMovieDetailNotifier extends _i1.Mock
   @override
   _i9.RequestState get recommendationState =>
       (super.noSuchMethod(Invocation.getter(#recommendationState),
-          returnValue: _i9.RequestState.Empty) as _i9.RequestState);
+          returnValue: _i9.RequestState.empty) as _i9.RequestState);
   @override
   String get message =>
       (super.noSuchMethod(Invocation.getter(#message), returnValue: '')

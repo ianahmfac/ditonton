@@ -1,4 +1,4 @@
-import 'package:ditonton/common/constants.dart';
+import 'package:core/core.dart';
 import 'package:ditonton/data/models/movie_table.dart';
 import 'package:ditonton/data/models/tv_table.dart';
 import 'package:ditonton/domain/entities/genre.dart';
@@ -66,11 +66,11 @@ final testMovieMap = {
 
 // TV
 final testTv = TvSeries(
-  backdropPath: '$BASE_IMAGE_URL/muth4OYamXf41G2evdrLEg8d3om.jpg',
+  backdropPath: '$baseImageUrl/muth4OYamXf41G2evdrLEg8d3om.jpg',
   id: 557,
   overview:
       'After being bitten by a genetically altered spider, nerdy high school student Peter Parker is endowed with amazing powers to become the Amazing superhero known as Spider-Man.',
-  posterPath: '$BASE_IMAGE_URL/rweIrveL43TaxUN0akQEaAXL6x0.jpg',
+  posterPath: '$baseImageUrl/rweIrveL43TaxUN0akQEaAXL6x0.jpg',
   name: 'Spider-Man',
 );
 
@@ -80,7 +80,7 @@ final testTvDetail = TvDetail(
   genres: [Genre(id: 1, name: 'Action')],
   id: 1,
   overview: 'overview',
-  posterPath: '$BASE_IMAGE_URL/posterPath',
+  posterPath: '$baseImageUrl/posterPath',
   name: 'title',
   voteAverage: 1,
   voteCount: 1,
@@ -88,14 +88,14 @@ final testTvDetail = TvDetail(
     id: 11,
     name: 'epsName',
     overview: 'overview',
-    stillPath: '$BASE_IMAGE_URL/stillPath',
+    stillPath: '$baseImageUrl/stillPath',
     episodeNumber: 1,
   ),
   nextEpisode: TvEpisode(
     id: 11,
     name: 'epsName',
     overview: 'overview',
-    stillPath: '$BASE_IMAGE_URL/stillPath',
+    stillPath: '$baseImageUrl/stillPath',
     episodeNumber: 1,
   ),
   seasons: [
@@ -103,7 +103,7 @@ final testTvDetail = TvDetail(
       id: 21,
       name: 'seasonName',
       overview: 'overview',
-      posterPath: '$BASE_IMAGE_URL/posterPath',
+      posterPath: '$baseImageUrl/posterPath',
       seasonNumber: 1,
       episodeCount: 1,
     ),
@@ -113,7 +113,7 @@ final testTvDetail = TvDetail(
 final testWatchlistTv = TvSeries(
   id: 1,
   name: 'title',
-  posterPath: '$BASE_IMAGE_URL/posterPath',
+  posterPath: '$baseImageUrl/posterPath',
   overview: 'overview',
   backdropPath: null,
 );
@@ -121,13 +121,13 @@ final testWatchlistTv = TvSeries(
 final testTvTable = TvTable(
   id: 1,
   title: 'title',
-  posterPath: '$BASE_IMAGE_URL/posterPath',
+  posterPath: '$baseImageUrl/posterPath',
   overview: 'overview',
 );
 
 final testTvMap = {
   'id': 1,
   'overview': 'overview',
-  'posterPath': '$BASE_IMAGE_URL/posterPath',
+  'posterPath': '$baseImageUrl/posterPath',
   'title': 'title',
 };

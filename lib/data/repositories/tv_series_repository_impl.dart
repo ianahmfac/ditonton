@@ -1,9 +1,8 @@
 import 'dart:io';
 
+import 'package:core/core.dart';
 import 'package:dartz/dartz.dart';
 
-import '../../common/exception.dart';
-import '../../common/failure.dart';
 import '../../domain/entities/tv_detail.dart';
 import '../../domain/entities/tv_series.dart';
 import '../../domain/repositories/tv_series_repository.dart';

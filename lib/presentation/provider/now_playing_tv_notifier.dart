@@ -1,6 +1,6 @@
+import 'package:core/core.dart';
 import 'package:flutter/material.dart';
 
-import '../../common/state_enum.dart';
 import '../../domain/entities/tv_series.dart';
 import '../../domain/usecases/get_now_playing_tv_series.dart';
 
@@ -13,7 +13,7 @@ class NowPlayingTvNotifier extends ChangeNotifier {
   final List<TvSeries> _tvSeries = [];
   List<TvSeries> get tvSeries => _tvSeries;
 
-  RequestState _state = RequestState.Empty;
+  RequestState _state = RequestState.empty;
   RequestState get state => _state;
 
   String _message = '';
@@ -21,18 +21,18 @@ class NowPlayingTvNotifier extends ChangeNotifier {
 
   Future<void> fetchNowPlaying() async {
     _tvSeries.clear();
-    _state = RequestState.Loading;
+    _state = RequestState.loading;
     notifyListeners();
 
     final result = await getNowPlayingTvSeries.execute();
     result.fold(
       (failure) {
-        _state = RequestState.Error;
+        _state = RequestState.error;
         _message = failure.message;
         notifyListeners();
       },
       (tv) {
-        _state = RequestState.Loaded;
+        _state = RequestState.loaded;
         _tvSeries.addAll(tv);
         notifyListeners();
       },

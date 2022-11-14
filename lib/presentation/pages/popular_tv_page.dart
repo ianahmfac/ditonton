@@ -1,8 +1,8 @@
+import 'package:core/core.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:pull_to_refresh/pull_to_refresh.dart';
 
-import '../../common/state_enum.dart';
 import '../provider/popular_tv_notifier.dart';
 import '../widgets/movie_tv_card.dart';
 import '../widgets/state_widget_builder.dart';
@@ -55,7 +55,7 @@ class _PopularTvPageState extends State<PopularTvPage> {
                   onLoading: () async {
                     final notifier = context.read<PopularTvNotifier>();
                     await notifier.fetchPopularTvSeries(init: false);
-                    if (notifier.state == RequestState.Loaded) {
+                    if (notifier.state == RequestState.loaded) {
                       _refreshController.loadComplete();
                     } else {
                       _refreshController.loadFailed();

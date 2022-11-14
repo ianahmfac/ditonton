@@ -1,6 +1,6 @@
+import 'package:core/core.dart';
 import 'package:equatable/equatable.dart';
 
-import '../../common/constants.dart';
 import '../../domain/entities/tv_detail.dart';
 import 'genre_model.dart';
 import 'tv_episode_model.dart';
@@ -68,7 +68,7 @@ class TvDetailModel extends Equatable {
       name: json['name'] ?? '',
       overview: json['overview'] ?? '',
       genres: List<GenreModel>.from(json['genres']?.map((x) => GenreModel.fromJson(x))),
-      posterPath: json['poster_path'] != null ? '$BASE_IMAGE_URL${json['poster_path']}' : null,
+      posterPath: json['poster_path'] != null ? '$baseImageUrl${json['poster_path']}' : null,
       voteAverage: json['vote_average']?.toDouble() ?? 0.0,
       voteCount: json['vote_count']?.toInt() ?? 0,
       seasons: List<TvSeasonModel>.from(json['seasons']?.map((x) => TvSeasonModel.fromJson(x))),

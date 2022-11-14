@@ -1,7 +1,5 @@
+import 'package:core/core.dart';
 import 'package:dartz/dartz.dart';
-import 'package:ditonton/common/constants.dart';
-import 'package:ditonton/common/failure.dart';
-import 'package:ditonton/common/state_enum.dart';
 import 'package:ditonton/domain/entities/tv_series.dart';
 import 'package:ditonton/domain/usecases/search_tv_series.dart';
 import 'package:ditonton/presentation/provider/tv_search_notifier.dart';
@@ -27,11 +25,11 @@ void main() {
   });
 
   final tTv = TvSeries(
-    backdropPath: '$BASE_IMAGE_URL/muth4OYamXf41G2evdrLEg8d3om.jpg',
+    backdropPath: '$baseImageUrl/muth4OYamXf41G2evdrLEg8d3om.jpg',
     id: 557,
     overview:
         'After being bitten by a genetically altered spider, nerdy high school student Peter Parker is endowed with amazing powers to become the Amazing superhero known as Spider-Man.',
-    posterPath: '$BASE_IMAGE_URL/rweIrveL43TaxUN0akQEaAXL6x0.jpg',
+    posterPath: '$baseImageUrl/rweIrveL43TaxUN0akQEaAXL6x0.jpg',
     name: 'Spider-Man',
   );
   final tTvList = <TvSeries>[tTv];
@@ -44,7 +42,7 @@ void main() {
       // act
       provider.fetchTvSearch(tQuery);
       // assert
-      expect(provider.state, RequestState.Loading);
+      expect(provider.state, RequestState.loading);
     });
 
     test('should change search result data when data is gotten successfully', () async {
@@ -53,7 +51,7 @@ void main() {
       // act
       await provider.fetchTvSearch(tQuery);
       // assert
-      expect(provider.state, RequestState.Loaded);
+      expect(provider.state, RequestState.loaded);
       expect(provider.searchResult, tTvList);
       expect(listenerCallCount, 2);
     });
@@ -65,7 +63,7 @@ void main() {
       // act
       await provider.fetchTvSearch(tQuery);
       // assert
-      expect(provider.state, RequestState.Error);
+      expect(provider.state, RequestState.error);
       expect(provider.message, 'Server Failure');
       expect(listenerCallCount, 2);
     });

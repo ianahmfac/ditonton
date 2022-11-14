@@ -24,6 +24,8 @@ dependencies:
   about:
     path: about
   cached_network_image: ^3.0.0
+  core:
+    path: core
   cupertino_icons: ^1.0.2
   dartz: ^0.10.0-nullsafety.2
   equatable: ^2.0.2

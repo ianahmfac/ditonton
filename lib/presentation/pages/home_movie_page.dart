@@ -1,7 +1,7 @@
+import 'package:core/core.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
-import '../../common/constants.dart';
 import '../../domain/entities/movie.dart';
 import '../provider/movie_list_notifier.dart';
 import '../widgets/app_drawer.dart';
@@ -112,7 +112,7 @@ class MovieList extends StatelessWidget {
             onTap: () {
               Navigator.pushNamed(context, MovieDetailPage.ROUTE_NAME, arguments: movie.id);
             },
-            posterPath: '$BASE_IMAGE_URL/${movie.posterPath}',
+            posterPath: '$baseImageUrl/${movie.posterPath}',
           );
         },
         itemCount: movies.length,

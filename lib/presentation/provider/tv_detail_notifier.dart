@@ -1,6 +1,6 @@
+import 'package:core/core.dart';
 import 'package:flutter/material.dart';
 
-import '../../common/state_enum.dart';
 import '../../domain/entities/tv_detail.dart';
 import '../../domain/entities/tv_series.dart';
 import '../../domain/usecases/get_tv_detail.dart';
@@ -26,13 +26,13 @@ class TvDetailNotifier extends ChangeNotifier {
   late TvDetail _tvDetail;
   TvDetail get tvDetail => _tvDetail;
 
-  RequestState _detailState = RequestState.Empty;
+  RequestState _detailState = RequestState.empty;
   RequestState get detailState => _detailState;
 
   List<TvSeries> _recommendations = [];
   List<TvSeries> get recommendations => _recommendations;
 
-  RequestState _recommendationState = RequestState.Empty;
+  RequestState _recommendationState = RequestState.empty;
   RequestState get recommendationState => _recommendationState;
 
   String _message = '';
@@ -45,18 +45,18 @@ class TvDetailNotifier extends ChangeNotifier {
   String get watchlistMessage => _watchlistMessage;
 
   Future<void> fetchDetail(int id) async {
-    _detailState = RequestState.Loading;
+    _detailState = RequestState.loading;
     notifyListeners();
 
     final result = await getTvDetail.execute(id);
     result.fold(
       (failure) {
-        _detailState = RequestState.Error;
+        _detailState = RequestState.error;
         _message = failure.message;
         notifyListeners();
       },
       (tvDetail) {
-        _detailState = RequestState.Loaded;
+        _detailState = RequestState.loaded;
         _tvDetail = tvDetail;
         notifyListeners();
       },
@@ -65,18 +65,18 @@ class TvDetailNotifier extends ChangeNotifier {
 
   Future<void> fetchRecommendations(int tvId) async {
     _recommendations.clear();
-    _recommendationState = RequestState.Loading;
+    _recommendationState = RequestState.loading;
     notifyListeners();
 
     final result = await getTvDetailRecommendation.execute(tvId);
     result.fold(
       (failure) {
-        _recommendationState = RequestState.Error;
+        _recommendationState = RequestState.error;
         _message = failure.message;
         notifyListeners();
       },
       (recommendations) {
-        _recommendationState = RequestState.Loaded;
+        _recommendationState = RequestState.loaded;
         _recommendations.addAll(recommendations);
         notifyListeners();
       },
