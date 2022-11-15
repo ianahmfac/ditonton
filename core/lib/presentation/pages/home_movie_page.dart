@@ -1,4 +1,5 @@
 import 'package:core/core.dart';
+import 'package:core/utils/routes.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
@@ -12,7 +13,6 @@ import '../widgets/state_widget_builder.dart';
 import 'home_tv_page.dart';
 import 'movie_detail_page.dart';
 import 'popular_movies_page.dart';
-import 'search_page.dart';
 import 'top_rated_movies_page.dart';
 
 class HomeMoviePage extends StatefulWidget {
@@ -41,7 +41,7 @@ class _HomeMoviePageState extends State<HomeMoviePage> {
       ),
       appBar: HomeAppBar(
         title: 'Ditonton - Movies',
-        onSearch: () => Navigator.pushNamed(context, SearchPage.routeName),
+        onSearch: () => Navigator.pushNamed(context, searchRoute),
       ),
       body: Padding(
         padding: const EdgeInsets.all(8.0),

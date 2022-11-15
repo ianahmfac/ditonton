@@ -1,11 +1,11 @@
 import 'package:core/core.dart';
 import 'package:core/domain/entities/tv_series.dart';
-import 'package:core/domain/usecases/search_tv_series.dart';
-import 'package:core/presentation/provider/tv_search_notifier.dart';
 import 'package:dartz/dartz.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:mockito/annotations.dart';
 import 'package:mockito/mockito.dart';
+import 'package:search/domain/usecases/search_tv_series.dart';
+import 'package:search/presentation/provider/tv_search_notifier.dart';
 
 import 'tv_search_notifier_test.mocks.dart';
 

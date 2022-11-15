@@ -1,3 +1,4 @@
+import 'package:core/utils/routes.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
@@ -10,7 +11,6 @@ import '../widgets/home_sub_heading.dart';
 import '../widgets/state_widget_builder.dart';
 import 'now_playing_tv_page.dart';
 import 'popular_tv_page.dart';
-import 'search_tv_page.dart';
 import 'top_rated_tv_page.dart';
 import 'tv_detail_page.dart';
 
@@ -43,7 +43,7 @@ class _HomeTvPageState extends State<HomeTvPage> {
       ),
       appBar: HomeAppBar(
         title: 'Ditonton - Tv Series',
-        onSearch: () => Navigator.pushNamed(context, SearchTvPage.routeName),
+        onSearch: () => Navigator.pushNamed(context, searchTvRoute),
       ),
       body: SingleChildScrollView(
         child: Padding(
