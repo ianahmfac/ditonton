@@ -27,8 +27,8 @@ class _SearchTvPageState extends State<SearchTvPage> {
           children: [
             TextField(
               autofocus: true,
-              onSubmitted: (query) {
-                context.read<SearchTvBloc>().add(OnTvQueryChanged(query));
+              onChanged: (value) {
+                context.read<SearchTvBloc>().add(OnTvQueryChanged(value));
               },
               decoration: const InputDecoration(
                 hintText: 'Search title',

@@ -1,7 +1,6 @@
 import 'package:core/utils/routes.dart';
 import 'package:flutter/material.dart';
-
-import '../pages/watchlist_page.dart';
+import 'package:movie/presentation/pages/watchlist_page.dart';
 
 class AppDrawer extends StatelessWidget {
   final void Function() onMovieClick;
