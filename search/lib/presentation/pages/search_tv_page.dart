@@ -1,11 +1,9 @@
 import 'package:core/core.dart';
 import 'package:core/presentation/pages/tv_detail_page.dart';
 import 'package:core/presentation/widgets/movie_tv_card.dart';
-import 'package:core/presentation/widgets/state_widget_builder.dart';
 import 'package:flutter/material.dart';
-import 'package:provider/provider.dart';
-
-import '../provider/tv_search_notifier.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:search/presentation/bloc/search_tv_bloc.dart';
 
 class SearchTvPage extends StatefulWidget {
   static const routeName = '/search-tv';
@@ -30,7 +28,7 @@ class _SearchTvPageState extends State<SearchTvPage> {
             TextField(
               autofocus: true,
               onSubmitted: (query) {
-                context.read<TvSearchNotifier>().fetchTvSearch(query);
+                context.read<SearchTvBloc>().add(OnTvQueryChanged(query));
               },
               decoration: const InputDecoration(
                 hintText: 'Search title',
@@ -44,36 +42,42 @@ class _SearchTvPageState extends State<SearchTvPage> {
               'Search Result',
               style: kHeading6,
             ),
-            Consumer<TvSearchNotifier>(
-              builder: (context, data, child) {
-                final state = data.state;
-                return StateWidgetBuilder(
-                  state: state,
-                  loadedWidget: (context) {
-                    final result = data.searchResult;
-                    return Expanded(
-                      child: ListView.builder(
-                        padding: const EdgeInsets.all(8),
-                        itemBuilder: (context, index) {
-                          final tv = data.searchResult[index];
-                          return MovieTvCard(
-                            onTap: () {
-                              Navigator.pushNamed(
-                                context,
-                                TvDetailPage.routeName,
-                                arguments: tv.id,
-                              );
-                            },
-                            title: tv.name,
-                            overview: tv.overview,
-                            posterPath: tv.posterPath ?? '',
-                          );
-                        },
-                        itemCount: result.length,
-                      ),
-                    );
-                  },
-                );
+            BlocBuilder<SearchTvBloc, SearchTvState>(
+              builder: (context, state) {
+                if (state is SearchTvLoading) {
+                  return const Center(
+                    child: CircularProgressIndicator(),
+                  );
+                } else if (state is SearchTvError) {
+                  return Center(
+                    key: const Key('error_message'),
+                    child: Text(state.message),
+                  );
+                } else if (state is SearchTvHasData) {
+                  final result = state.result;
+                  return Expanded(
+                    child: ListView.builder(
+                      padding: const EdgeInsets.all(8),
+                      itemBuilder: (context, index) {
+                        final tv = result[index];
+                        return MovieTvCard(
+                          onTap: () {
+                            Navigator.pushNamed(
+                              context,
+                              TvDetailPage.routeName,
+                              arguments: tv.id,
+                            );
+                          },
+                          title: tv.name,
+                          overview: tv.overview,
+                          posterPath: tv.posterPath ?? '',
+                        );
+                      },
+                      itemCount: result.length,
+                    ),
+                  );
+                }
+                return const SizedBox();
               },
             ),
           ],

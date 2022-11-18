@@ -2,9 +2,8 @@ import 'package:core/core.dart';
 import 'package:core/presentation/pages/movie_detail_page.dart';
 import 'package:core/presentation/widgets/movie_tv_card.dart';
 import 'package:flutter/material.dart';
-import 'package:provider/provider.dart';
-
-import '../provider/movie_search_notifier.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:search/presentation/bloc/search_bloc.dart';
 
 class SearchPage extends StatelessWidget {
   static const routeName = '/search';
@@ -24,8 +23,8 @@ class SearchPage extends StatelessWidget {
           children: [
             TextField(
               autofocus: true,
-              onSubmitted: (query) {
-                Provider.of<MovieSearchNotifier>(context, listen: false).fetchMovieSearch(query);
+              onChanged: (value) {
+                context.read<SearchBloc>().add(OnQueryChanged(value));
               },
               decoration: const InputDecoration(
                 hintText: 'Search title',
@@ -39,19 +38,19 @@ class SearchPage extends StatelessWidget {
               'Search Result',
               style: kHeading6,
             ),
-            Consumer<MovieSearchNotifier>(
-              builder: (context, data, child) {
-                if (data.state == RequestState.loading) {
+            BlocBuilder<SearchBloc, SearchState>(
+              builder: (context, state) {
+                if (state is SearchLoading) {
                   return const Center(
                     child: CircularProgressIndicator(),
                   );
-                } else if (data.state == RequestState.loaded) {
-                  final result = data.searchResult;
+                } else if (state is SearchHasData) {
+                  final data = state.result;
                   return Expanded(
                     child: ListView.builder(
                       padding: const EdgeInsets.all(8),
                       itemBuilder: (context, index) {
-                        final movie = data.searchResult[index];
+                        final movie = data[index];
                         return MovieTvCard(
                           onTap: () {
                             Navigator.pushNamed(
@@ -65,14 +64,15 @@ class SearchPage extends StatelessWidget {
                           posterPath: '$baseImageUrl/${movie.posterPath}',
                         );
                       },
-                      itemCount: result.length,
+                      itemCount: data.length,
                     ),
                   );
-                } else {
+                } else if (state is SearchError) {
                   return Expanded(
-                    child: Container(),
+                    child: Center(child: Text(state.message)),
                   );
                 }
+                return const SizedBox();
               },
             ),
           ],
