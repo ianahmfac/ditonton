@@ -10,18 +10,12 @@ environment:
 
 dependencies:
   cached_network_image: ^3.2.2
-  dartz: ^0.10.1
   equatable: ^2.0.5
   flutter:
     sdk: flutter
-  flutter_rating_bar: ^4.0.1
-  get_it: ^7.2.0
   google_fonts: ^3.0.1
-  http: ^0.13.5
   movie:
     path: ../movie
-  provider: ^6.0.4
-  pull_to_refresh: ^2.0.0
   sqflite: ^2.2.0+3
   tv_series:
     path: ../tv_series

@@ -14,7 +14,7 @@ import 'package:movie/domain/usecases/get_watchlist_movies.dart';
 import 'package:movie/domain/usecases/get_watchlist_status.dart';
 import 'package:movie/domain/usecases/remove_watchlist.dart';
 import 'package:movie/domain/usecases/save_watchlist.dart';
-import 'package:movie/presentation/bloc/movie_detail_notifier.dart';
+import 'package:movie/presentation/bloc/movie_detail/movie_detail_bloc_export.dart';
 import 'package:movie/presentation/bloc/movie_list_notifier.dart';
 import 'package:movie/presentation/bloc/popular_movies_notifier.dart';
 import 'package:movie/presentation/bloc/top_rated_movies_notifier.dart';
@@ -54,15 +54,19 @@ void init() {
       getTopRatedMovies: locator(),
     ),
   );
+
   locator.registerFactory(
-    () => MovieDetailNotifier(
+    () => MovieDetailBloc(
       getMovieDetail: locator(),
-      getMovieRecommendations: locator(),
-      getWatchListStatus: locator(),
-      saveWatchlist: locator(),
-      removeWatchlist: locator(),
     ),
   );
+  locator.registerFactory(
+    () => MovieDetailRecommendationBloc(locator()),
+  );
+  locator.registerFactory(
+    () => MovieDetailWatchlistBloc(locator(), locator(), locator()),
+  );
+
   locator.registerFactory(
     () => SearchBloc(locator()),
   );
