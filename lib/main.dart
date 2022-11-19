@@ -1,17 +1,6 @@
 import 'package:about/about.dart';
 import 'package:core/common/utils.dart';
 import 'package:core/core.dart';
-import 'package:core/presentation/pages/home_tv_page.dart';
-import 'package:core/presentation/pages/now_playing_tv_page.dart';
-import 'package:core/presentation/pages/popular_tv_page.dart';
-import 'package:core/presentation/pages/top_rated_tv_page.dart';
-import 'package:core/presentation/pages/tv_detail_page.dart';
-import 'package:core/presentation/provider/now_playing_tv_notifier.dart';
-import 'package:core/presentation/provider/popular_tv_notifier.dart';
-import 'package:core/presentation/provider/top_rated_tv_notifier.dart';
-import 'package:core/presentation/provider/tv_detail_notifier.dart';
-import 'package:core/presentation/provider/tv_series_list_notifier.dart';
-import 'package:core/presentation/provider/watchlist_tv_notifier.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -27,6 +16,17 @@ import 'package:movie/presentation/pages/top_rated_movies_page.dart';
 import 'package:movie/presentation/pages/watchlist_page.dart';
 import 'package:provider/provider.dart';
 import 'package:search/search.dart';
+import 'package:tv_series/presentation/bloc/now_playing_tv_notifier.dart';
+import 'package:tv_series/presentation/bloc/popular_tv_notifier.dart';
+import 'package:tv_series/presentation/bloc/top_rated_tv_notifier.dart';
+import 'package:tv_series/presentation/bloc/tv_detail_notifier.dart';
+import 'package:tv_series/presentation/bloc/tv_series_list_notifier.dart';
+import 'package:tv_series/presentation/bloc/watchlist_tv_notifier.dart';
+import 'package:tv_series/presentation/pages/home_tv_page.dart';
+import 'package:tv_series/presentation/pages/now_playing_tv_page.dart';
+import 'package:tv_series/presentation/pages/popular_tv_page.dart';
+import 'package:tv_series/presentation/pages/top_rated_tv_page.dart';
+import 'package:tv_series/presentation/pages/tv_detail_page.dart';
 
 import 'injection.dart' as di;
 

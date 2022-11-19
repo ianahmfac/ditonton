@@ -1,9 +1,9 @@
 import 'package:core/core.dart';
-import 'package:core/presentation/pages/tv_detail_page.dart';
 import 'package:core/presentation/widgets/movie_tv_card.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:search/presentation/bloc/search_tv_bloc.dart';
+import 'package:tv_series/presentation/pages/tv_detail_page.dart';
 
 class SearchTvPage extends StatefulWidget {
   static const routeName = '/search-tv';

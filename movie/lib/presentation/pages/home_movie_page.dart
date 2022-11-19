@@ -1,5 +1,4 @@
 import 'package:core/core.dart';
-import 'package:core/presentation/pages/home_tv_page.dart';
 import 'package:core/presentation/widgets/app_drawer.dart';
 import 'package:core/presentation/widgets/home_app_bar.dart';
 import 'package:core/presentation/widgets/home_list_widget.dart';
@@ -8,6 +7,7 @@ import 'package:core/presentation/widgets/state_widget_builder.dart';
 import 'package:core/utils/routes.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
+import 'package:tv_series/presentation/pages/home_tv_page.dart';
 
 import '../../domain/entities/movie.dart';
 import '../bloc/movie_list_notifier.dart';

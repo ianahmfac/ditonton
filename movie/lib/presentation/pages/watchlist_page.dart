@@ -1,11 +1,11 @@
 import 'package:core/common/utils.dart';
 import 'package:core/core.dart';
-import 'package:core/presentation/pages/tv_detail_page.dart';
-import 'package:core/presentation/provider/watchlist_tv_notifier.dart';
 import 'package:core/presentation/widgets/movie_tv_card.dart';
 import 'package:core/presentation/widgets/state_widget_builder.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
+import 'package:tv_series/presentation/bloc/watchlist_tv_notifier.dart';
+import 'package:tv_series/presentation/pages/tv_detail_page.dart';
 
 import '../bloc/watchlist_movie_notifier.dart';
 import 'movie_detail_page.dart';

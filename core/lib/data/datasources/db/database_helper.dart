@@ -2,8 +2,7 @@ import 'dart:async';
 
 import 'package:movie/data/models/movie_table.dart';
 import 'package:sqflite/sqflite.dart';
-
-import '../../models/tv_table.dart';
+import 'package:tv_series/data/models/tv_table.dart';
 
 class DatabaseHelper {
   static DatabaseHelper? _databaseHelper;
