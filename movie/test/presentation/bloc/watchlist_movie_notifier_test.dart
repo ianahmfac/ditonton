@@ -1,15 +1,12 @@
 import 'package:core/core.dart';
 import 'package:dartz/dartz.dart';
 import 'package:flutter_test/flutter_test.dart';
-import 'package:mockito/annotations.dart';
 import 'package:mockito/mockito.dart';
-import 'package:movie/domain/usecases/get_watchlist_movies.dart';
 import 'package:movie/presentation/bloc/watchlist_movie_notifier.dart';
 
 import '../../dummy_data/dummy_object.dart';
-import 'watchlist_movie_notifier_test.mocks.dart';
+import '../../helpers/test_helpers.mocks.dart';
 
-@GenerateMocks([GetWatchlistMovies])
 void main() {
   late WatchlistMovieNotifier provider;
   late MockGetWatchlistMovies mockGetWatchlistMovies;
