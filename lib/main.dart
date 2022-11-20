@@ -4,10 +4,10 @@ import 'package:core/core.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:movie/presentation/bloc/movie_detail/movie_detail_bloc_export.dart';
 import 'package:movie/presentation/bloc/home_movie/home_movie_bloc_export.dart';
-import 'package:movie/presentation/bloc/popular_movies_notifier.dart';
-import 'package:movie/presentation/bloc/top_rated_movies_notifier.dart';
+import 'package:movie/presentation/bloc/movie_detail/movie_detail_bloc_export.dart';
+import 'package:movie/presentation/bloc/popular_movie/popular_movie_bloc.dart';
+import 'package:movie/presentation/bloc/top_rated_movie/top_rated_movie_bloc.dart';
 import 'package:movie/presentation/bloc/watchlist_movie_notifier.dart';
 import 'package:movie/presentation/pages/home_movie_page.dart';
 import 'package:movie/presentation/pages/movie_detail_page.dart';
@@ -61,12 +61,8 @@ class MyApp extends StatelessWidget {
         BlocProvider(
           create: (context) => di.locator<SearchBloc>(),
         ),
-        ChangeNotifierProvider(
-          create: (_) => di.locator<TopRatedMoviesNotifier>(),
-        ),
-        ChangeNotifierProvider(
-          create: (_) => di.locator<PopularMoviesNotifier>(),
-        ),
+        BlocProvider(create: (context) => di.locator<PopularMovieBloc>()),
+        BlocProvider(create: (context) => di.locator<TopRatedMovieBloc>()),
         ChangeNotifierProvider(
           create: (_) => di.locator<WatchlistMovieNotifier>(),
         ),
