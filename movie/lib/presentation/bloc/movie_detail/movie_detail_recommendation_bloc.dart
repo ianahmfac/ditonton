@@ -1,3 +1,4 @@
+import 'package:equatable/equatable.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:movie/domain/usecases/get_movie_recommendations.dart';
 
@@ -16,8 +17,8 @@ class MovieDetailRecommendationBloc
       emit(MovieDetailRecommendationLoading());
       final result = await getMovieRecommendations.execute(event.id);
       result.fold(
-        (fail) => emit(MovieDetailRecommendationError(message: fail.message)),
-        (data) => emit(MovieDetailRecommendationLoaded(recommendations: data)),
+        (fail) => emit(MovieDetailRecommendationError(fail.message)),
+        (data) => emit(MovieDetailRecommendationLoaded(data)),
       );
     });
   }

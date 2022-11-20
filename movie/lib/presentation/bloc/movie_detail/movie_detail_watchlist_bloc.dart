@@ -1,3 +1,4 @@
+import 'package:equatable/equatable.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:movie/domain/usecases/get_watchlist_status.dart';
 import 'package:movie/domain/usecases/remove_watchlist.dart';
@@ -19,21 +20,21 @@ class MovieDetailWatchlistBloc extends Bloc<MovieDetailWatchlistEvent, MovieDeta
   ) : super(MovieDetailWatchlistInitial()) {
     on<GetWatchListStatusEvent>((event, emit) async {
       final result = await getWatchListStatus.execute(event.id);
-      emit(MovieWatchlistStatus(isAddToWatchlist: result));
+      emit(MovieWatchlistStatus(result));
     });
     on<SaveWatchlistEvent>((event, emit) async {
       final result = await saveWatchlist.execute(event.movie);
       result.fold(
-        (fail) => emit(MovieWatchlistAddRemove(message: fail.message)),
-        (message) => emit(MovieWatchlistAddRemove(message: message)),
+        (fail) => emit(MovieWatchlistAddRemove(fail.message)),
+        (message) => emit(MovieWatchlistAddRemove(message)),
       );
       add(GetWatchListStatusEvent(id: event.movie.id));
     });
     on<RemoveWatchlistEvent>((event, emit) async {
       final result = await removeWatchlist.execute(event.movie);
       result.fold(
-        (fail) => emit(MovieWatchlistAddRemove(message: fail.message)),
-        (message) => emit(MovieWatchlistAddRemove(message: message)),
+        (fail) => emit(MovieWatchlistAddRemove(fail.message)),
+        (message) => emit(MovieWatchlistAddRemove(message)),
       );
       add(GetWatchListStatusEvent(id: event.movie.id));
     });

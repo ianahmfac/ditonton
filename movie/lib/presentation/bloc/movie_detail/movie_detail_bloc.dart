@@ -1,3 +1,4 @@
+import 'package:equatable/equatable.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:movie/domain/entities/movie_detail.dart';
 import 'package:movie/domain/usecases/get_movie_detail.dart';
@@ -14,8 +15,8 @@ class MovieDetailBloc extends Bloc<MovieDetailEvent, MovieDetailState> {
       emit(MovieDetailLoading());
       final result = await getMovieDetail.execute(event.id);
       result.fold(
-        (fail) => emit(MovieDetailError(message: fail.message)),
-        (data) => emit(MovieDetailLoaded(movieDetail: data)),
+        (fail) => emit(MovieDetailError(fail.message)),
+        (data) => emit(MovieDetailLoaded(data)),
       );
     });
   }
