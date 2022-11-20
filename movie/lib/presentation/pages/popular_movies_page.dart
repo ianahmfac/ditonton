@@ -1,9 +1,9 @@
 import 'package:core/core.dart';
 import 'package:core/presentation/widgets/movie_tv_card.dart';
 import 'package:flutter/material.dart';
-import 'package:provider/provider.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:movie/presentation/bloc/popular_movie/popular_movie_bloc.dart';
 
-import '../bloc/popular_movies_notifier.dart';
 import 'movie_detail_page.dart';
 
 class PopularMoviesPage extends StatefulWidget {
@@ -19,8 +19,7 @@ class _PopularMoviesPageState extends State<PopularMoviesPage> {
   @override
   void initState() {
     super.initState();
-    Future.microtask(
-        () => Provider.of<PopularMoviesNotifier>(context, listen: false).fetchPopularMovies());
+    Future.microtask(() => context.read<PopularMovieBloc>().add(GetPopularMovieEvent()));
   }
 
   @override
@@ -31,16 +30,16 @@ class _PopularMoviesPageState extends State<PopularMoviesPage> {
       ),
       body: Padding(
         padding: const EdgeInsets.all(8.0),
-        child: Consumer<PopularMoviesNotifier>(
-          builder: (context, data, child) {
-            if (data.state == RequestState.loading) {
+        child: BlocBuilder<PopularMovieBloc, PopularMovieState>(
+          builder: (context, state) {
+            if (state is PopularMovieLoading) {
               return const Center(
                 child: CircularProgressIndicator(),
               );
-            } else if (data.state == RequestState.loaded) {
+            } else if (state is PopularMovieLoaded) {
               return ListView.builder(
                 itemBuilder: (context, index) {
-                  final movie = data.movies[index];
+                  final movie = state.popularMovies[index];
                   return MovieTvCard(
                     onTap: () {
                       Navigator.pushNamed(context, MovieDetailPage.routeName, arguments: movie.id);
@@ -50,14 +49,15 @@ class _PopularMoviesPageState extends State<PopularMoviesPage> {
                     posterPath: '$baseImageUrl/${movie.posterPath}',
                   );
                 },
-                itemCount: data.movies.length,
+                itemCount: state.popularMovies.length,
               );
-            } else {
+            } else if (state is PopularMovieError) {
               return Center(
                 key: const Key('error_message'),
-                child: Text(data.message),
+                child: Text(state.message),
               );
             }
+            return Container();
           },
         ),
       ),
