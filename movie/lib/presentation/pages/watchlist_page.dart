@@ -3,11 +3,12 @@ import 'package:core/core.dart';
 import 'package:core/presentation/widgets/movie_tv_card.dart';
 import 'package:core/presentation/widgets/state_widget_builder.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:movie/presentation/bloc/watchlist_movie/watchlist_movie_bloc.dart';
 import 'package:provider/provider.dart';
 import 'package:tv_series/presentation/bloc/watchlist_tv_notifier.dart';
 import 'package:tv_series/presentation/pages/tv_detail_page.dart';
 
-import '../bloc/watchlist_movie_notifier.dart';
 import 'movie_detail_page.dart';
 
 class WatchlistPage extends StatefulWidget {
@@ -24,7 +25,7 @@ class _WatchlistPageState extends State<WatchlistPage> with RouteAware {
   void initState() {
     super.initState();
     Future.microtask(() {
-      context.read<WatchlistMovieNotifier>().fetchWatchlistMovies();
+      context.read<WatchlistMovieBloc>().add(GetWatchlistMovieEvent());
       context.read<WatchListTvNotifier>().fetchWatchList();
     });
   }
@@ -37,7 +38,7 @@ class _WatchlistPageState extends State<WatchlistPage> with RouteAware {
 
   @override
   void didPopNext() {
-    context.read<WatchlistMovieNotifier>().fetchWatchlistMovies();
+    context.read<WatchlistMovieBloc>().add(GetWatchlistMovieEvent());
     context.read<WatchListTvNotifier>().fetchWatchList();
   }
 
@@ -77,16 +78,16 @@ class _WatchlistPageState extends State<WatchlistPage> with RouteAware {
   }
 
   Widget _buildMovieWatchlist() {
-    return Consumer<WatchlistMovieNotifier>(
-      builder: (context, data, child) {
-        if (data.watchlistState == RequestState.loading) {
+    return BlocBuilder<WatchlistMovieBloc, WatchlistMovieState>(
+      builder: (context, state) {
+        if (state is WatchlistMovieLoading) {
           return const Center(
             child: CircularProgressIndicator(),
           );
-        } else if (data.watchlistState == RequestState.loaded) {
+        } else if (state is WatchlistMovieLoaded) {
           return ListView.builder(
             itemBuilder: (context, index) {
-              final movie = data.watchlistMovies[index];
+              final movie = state.watchlistMovies[index];
               return MovieTvCard(
                 onTap: () {
                   Navigator.pushNamed(
@@ -100,14 +101,15 @@ class _WatchlistPageState extends State<WatchlistPage> with RouteAware {
                 posterPath: '$baseImageUrl/${movie.posterPath}',
               );
             },
-            itemCount: data.watchlistMovies.length,
+            itemCount: state.watchlistMovies.length,
           );
-        } else {
+        } else if (state is WatchlistMovieError) {
           return Center(
             key: const Key('error_message'),
-            child: Text(data.message),
+            child: Text(state.message),
           );
         }
+        return Container();
       },
     );
   }

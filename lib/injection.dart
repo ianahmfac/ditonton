@@ -18,7 +18,7 @@ import 'package:movie/presentation/bloc/movie_detail/movie_detail_bloc_export.da
 import 'package:movie/presentation/bloc/home_movie/home_movie_bloc_export.dart';
 import 'package:movie/presentation/bloc/popular_movie/popular_movie_bloc.dart';
 import 'package:movie/presentation/bloc/top_rated_movie/top_rated_movie_bloc.dart';
-import 'package:movie/presentation/bloc/watchlist_movie_notifier.dart';
+import 'package:movie/presentation/bloc/watchlist_movie/watchlist_movie_bloc.dart';
 import 'package:search/domain/usecases/search_movies.dart';
 import 'package:search/domain/usecases/search_tv_series.dart';
 import 'package:search/presentation/bloc/search_bloc.dart';
@@ -71,11 +71,8 @@ void init() {
 
   locator.registerFactory(() => TopRatedMovieBloc(locator()));
 
-  locator.registerFactory(
-    () => WatchlistMovieNotifier(
-      getWatchlistMovies: locator(),
-    ),
-  );
+  locator.registerFactory(() => WatchlistMovieBloc(locator()));
+
   locator.registerFactory(
     () => TvSeriesListNotifier(
       getNowPlayingTvSeries: locator(),
