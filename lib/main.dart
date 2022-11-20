@@ -5,7 +5,7 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:movie/presentation/bloc/movie_detail/movie_detail_bloc_export.dart';
-import 'package:movie/presentation/bloc/movie_list_notifier.dart';
+import 'package:movie/presentation/bloc/home_movie/home_movie_bloc_export.dart';
 import 'package:movie/presentation/bloc/popular_movies_notifier.dart';
 import 'package:movie/presentation/bloc/top_rated_movies_notifier.dart';
 import 'package:movie/presentation/bloc/watchlist_movie_notifier.dart';
@@ -40,8 +40,14 @@ class MyApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return MultiProvider(
       providers: [
-        ChangeNotifierProvider(
-          create: (_) => di.locator<MovieListNotifier>(),
+        BlocProvider(
+          create: (context) => di.locator<HomeMovieNowPlayingBloc>(),
+        ),
+        BlocProvider(
+          create: (context) => di.locator<HomeMoviePopularBloc>(),
+        ),
+        BlocProvider(
+          create: (context) => di.locator<HomeMovieTopRatedBloc>(),
         ),
         BlocProvider(
           create: (_) => di.locator<MovieDetailBloc>(),

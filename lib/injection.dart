@@ -15,7 +15,7 @@ import 'package:movie/domain/usecases/get_watchlist_status.dart';
 import 'package:movie/domain/usecases/remove_watchlist.dart';
 import 'package:movie/domain/usecases/save_watchlist.dart';
 import 'package:movie/presentation/bloc/movie_detail/movie_detail_bloc_export.dart';
-import 'package:movie/presentation/bloc/movie_list_notifier.dart';
+import 'package:movie/presentation/bloc/home_movie/home_movie_bloc_export.dart';
 import 'package:movie/presentation/bloc/popular_movies_notifier.dart';
 import 'package:movie/presentation/bloc/top_rated_movies_notifier.dart';
 import 'package:movie/presentation/bloc/watchlist_movie_notifier.dart';
@@ -46,14 +46,10 @@ import 'package:tv_series/presentation/bloc/watchlist_tv_notifier.dart';
 final locator = GetIt.instance;
 
 void init() {
-  // provider
-  locator.registerFactory(
-    () => MovieListNotifier(
-      getNowPlayingMovies: locator(),
-      getPopularMovies: locator(),
-      getTopRatedMovies: locator(),
-    ),
-  );
+  // bloc
+  locator.registerFactory(() => HomeMovieNowPlayingBloc(locator()));
+  locator.registerFactory(() => HomeMoviePopularBloc(locator()));
+  locator.registerFactory(() => HomeMovieTopRatedBloc(locator()));
 
   locator.registerFactory(
     () => MovieDetailBloc(
