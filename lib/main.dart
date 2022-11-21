@@ -19,7 +19,7 @@ import 'package:search/search.dart';
 import 'package:tv_series/presentation/bloc/now_playing_tv_notifier.dart';
 import 'package:tv_series/presentation/bloc/popular_tv_notifier.dart';
 import 'package:tv_series/presentation/bloc/top_rated_tv_notifier.dart';
-import 'package:tv_series/presentation/bloc/tv_detail_notifier.dart';
+import 'package:tv_series/presentation/bloc/tv_detail/tv_detail_bloc_export.dart';
 import 'package:tv_series/presentation/bloc/tv_series_list_notifier.dart';
 import 'package:tv_series/presentation/bloc/watchlist_tv_notifier.dart';
 import 'package:tv_series/presentation/pages/home_tv_page.dart';
@@ -82,8 +82,14 @@ class MyApp extends StatelessWidget {
         BlocProvider(
           create: (context) => di.locator<SearchTvBloc>(),
         ),
-        ChangeNotifierProvider(
-          create: (context) => di.locator<TvDetailNotifier>(),
+        BlocProvider(
+          create: (context) => di.locator<TvDetailBloc>(),
+        ),
+        BlocProvider(
+          create: (context) => di.locator<TvDetailRecommendationBloc>(),
+        ),
+        BlocProvider(
+          create: (context) => di.locator<TvDetailWatchlistBloc>(),
         ),
       ],
       child: MaterialApp(
