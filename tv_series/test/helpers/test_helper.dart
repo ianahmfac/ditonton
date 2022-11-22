@@ -4,6 +4,9 @@ import 'package:http/http.dart' as http;
 import 'package:tv_series/data/datasources/tv_local_data_source.dart';
 import 'package:tv_series/data/datasources/tv_remote_data_source.dart';
 import 'package:tv_series/domain/repositories/tv_series_repository.dart';
+import 'package:tv_series/domain/usecases/get_now_playing_tv_series.dart';
+import 'package:tv_series/domain/usecases/get_popular_tv_series.dart';
+import 'package:tv_series/domain/usecases/get_top_rated_tv_series.dart';
 import 'package:tv_series/domain/usecases/get_tv_detail.dart';
 import 'package:tv_series/domain/usecases/get_tv_detail_recommendation.dart';
 import 'package:tv_series/domain/usecases/get_watchlist_tv_status.dart';
@@ -20,6 +23,9 @@ import 'package:tv_series/domain/usecases/save_watchlist_tv.dart';
   GetWatchlistTvStatus,
   SaveWatchlistTv,
   RemoveWatchListTv,
+  GetNowPlayingTvSeries,
+  GetPopularTvSeries,
+  GetTopRatedTvSeries,
 ], customMocks: [
   MockSpec<http.Client>(as: #MockHttpClient)
 ])

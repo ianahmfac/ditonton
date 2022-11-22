@@ -7,7 +7,7 @@ import 'package:tv_series/domain/entities/tv_series.dart';
 import 'package:tv_series/domain/usecases/get_popular_tv_series.dart';
 import 'package:tv_series/presentation/bloc/popular_tv_notifier.dart';
 
-import 'tv_series_list_notifier_test.mocks.dart';
+import 'popular_tv_notifier_test.mocks.dart';
 
 @GenerateMocks([GetPopularTvSeries])
 void main() {
