@@ -19,9 +19,9 @@ import 'package:search/search.dart';
 import 'package:tv_series/presentation/bloc/home_tv/home_tv_now_playing_bloc.dart';
 import 'package:tv_series/presentation/bloc/home_tv/home_tv_popular_bloc.dart';
 import 'package:tv_series/presentation/bloc/home_tv/home_tv_top_rated_bloc.dart';
-import 'package:tv_series/presentation/bloc/now_playing_tv_notifier.dart';
-import 'package:tv_series/presentation/bloc/popular_tv_notifier.dart';
-import 'package:tv_series/presentation/bloc/top_rated_tv_notifier.dart';
+import 'package:tv_series/presentation/bloc/now_playing_tv/now_playing_tv_bloc.dart';
+import 'package:tv_series/presentation/bloc/popular_tv/popular_tv_bloc.dart';
+import 'package:tv_series/presentation/bloc/top_rated_tv/top_rate_tv_bloc.dart';
 import 'package:tv_series/presentation/bloc/tv_detail/tv_detail_bloc_export.dart';
 import 'package:tv_series/presentation/bloc/watchlist_tv_notifier.dart';
 import 'package:tv_series/presentation/pages/home_tv_page.dart';
@@ -69,17 +69,11 @@ class MyApp extends StatelessWidget {
         BlocProvider(create: (context) => di.locator<HomeTvNowPlayingBloc>()),
         BlocProvider(create: (context) => di.locator<HomeTvPopularBloc>()),
         BlocProvider(create: (context) => di.locator<HomeTvTopRatedBloc>()),
-        ChangeNotifierProvider(
-          create: (context) => di.locator<PopularTvNotifier>(),
-        ),
-        ChangeNotifierProvider(
-          create: (context) => di.locator<TopRatedTvNotifier>(),
-        ),
+        BlocProvider(create: (context) => di.locator<NowPlayingTvBloc>()),
+        BlocProvider(create: (context) => di.locator<PopularTvBloc>()),
+        BlocProvider(create: (context) => di.locator<TopRatedTvBloc>()),
         ChangeNotifierProvider(
           create: (context) => di.locator<WatchListTvNotifier>(),
-        ),
-        ChangeNotifierProvider(
-          create: (context) => di.locator<NowPlayingTvNotifier>(),
         ),
         BlocProvider(
           create: (context) => di.locator<SearchTvBloc>(),

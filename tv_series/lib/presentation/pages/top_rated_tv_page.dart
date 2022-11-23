@@ -1,11 +1,9 @@
-import 'package:core/core.dart';
 import 'package:core/presentation/widgets/movie_tv_card.dart';
-import 'package:core/presentation/widgets/state_widget_builder.dart';
 import 'package:flutter/material.dart';
-import 'package:provider/provider.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:pull_to_refresh/pull_to_refresh.dart';
+import 'package:tv_series/presentation/bloc/top_rated_tv/top_rate_tv_bloc.dart';
 
-import '../bloc/top_rated_tv_notifier.dart';
 import 'tv_detail_page.dart';
 
 class TopRatedTvPage extends StatefulWidget {
@@ -24,7 +22,7 @@ class _TopRatedTvPageState extends State<TopRatedTvPage> {
   void initState() {
     super.initState();
     _refreshController = RefreshController();
-    Future.microtask(() => context.read<TopRatedTvNotifier>().fetchTopRatedTvSeries());
+    Future.microtask(() => context.read<TopRatedTvBloc>().add(GetTopRatedTvEvent()));
   }
 
   @override
@@ -34,32 +32,30 @@ class _TopRatedTvPageState extends State<TopRatedTvPage> {
         title: const Text('Top Rated TV Series'),
       ),
       body: Padding(
-        padding: const EdgeInsets.all(8.0),
-        child: Consumer<TopRatedTvNotifier>(
-          builder: (context, data, child) {
-            return StateWidgetBuilder(
-              state: data.state,
-              loadedWidget: (context) {
+          padding: const EdgeInsets.all(8.0),
+          child: BlocBuilder<TopRatedTvBloc, TopRatedTvState>(
+            buildWhen: (previous, current) => current is! TopRatedTvLoadMore,
+            builder: (context, state) {
+              if (state is TopRateTvLoading) {
+                return const Center(
+                  child: CircularProgressIndicator(),
+                );
+              } else if (state is TopRatedTvLoaded) {
                 return SmartRefresher(
                   controller: _refreshController,
                   enablePullDown: true,
                   enablePullUp: true,
-                  onRefresh: () async {
-                    await context.read<TopRatedTvNotifier>().fetchTopRatedTvSeries();
+                  onRefresh: () {
+                    context.read<TopRatedTvBloc>().add(GetTopRatedTvEvent());
                     _refreshController.refreshCompleted();
                   },
-                  onLoading: () async {
-                    final notifier = context.read<TopRatedTvNotifier>();
-                    await notifier.fetchTopRatedTvSeries(init: false);
-                    if (notifier.state == RequestState.loaded) {
-                      _refreshController.loadComplete();
-                    } else {
-                      _refreshController.loadFailed();
-                    }
+                  onLoading: () {
+                    context.read<TopRatedTvBloc>().add(GetTopRatedTvEvent(isLoadMore: true));
+                    _refreshController.loadComplete();
                   },
                   child: ListView.builder(
                     itemBuilder: (context, index) {
-                      final tv = data.tvSeries[index];
+                      final tv = state.tvSeries[index];
                       return MovieTvCard(
                         onTap: () => Navigator.pushNamed(
                           context,
@@ -71,15 +67,13 @@ class _TopRatedTvPageState extends State<TopRatedTvPage> {
                         posterPath: tv.posterPath ?? '',
                       );
                     },
-                    itemCount: data.tvSeries.length,
+                    itemCount: state.tvSeries.length,
                   ),
                 );
-              },
-              errorMessage: data.message,
-            );
-          },
-        ),
-      ),
+              }
+              return Container();
+            },
+          )),
     );
   }
 }

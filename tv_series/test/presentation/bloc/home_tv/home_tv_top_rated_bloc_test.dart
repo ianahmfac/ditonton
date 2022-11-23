@@ -6,7 +6,7 @@ import 'package:mockito/mockito.dart';
 import 'package:tv_series/presentation/bloc/home_tv/home_tv_top_rated_bloc.dart';
 
 import '../../../dummy_data/dummy_objects.dart';
-import '../top_rated_tv_notifier_test.mocks.dart';
+import '../../../helpers/test_helper.mocks.dart';
 
 void main() {
   late HomeTvTopRatedBloc bloc;
