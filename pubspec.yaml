@@ -32,7 +32,6 @@ dependencies:
   get_it: ^7.1.3
   movie:
     path: movie
-  provider: ^6.0.3
   search:
     path: search
   tv_series:
