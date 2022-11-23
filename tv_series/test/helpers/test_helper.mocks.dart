@@ -4,8 +4,8 @@
 
 // ignore_for_file: no_leading_underscores_for_library_prefixes
 import 'dart:async' as _i6;
-import 'dart:convert' as _i25;
-import 'dart:typed_data' as _i26;
+import 'dart:convert' as _i26;
+import 'dart:typed_data' as _i27;
 
 import 'package:core/core.dart' as _i7;
 import 'package:core/data/datasources/db/database_helper.dart' as _i14;
@@ -29,6 +29,7 @@ import 'package:tv_series/domain/usecases/get_top_rated_tv_series.dart' as _i24;
 import 'package:tv_series/domain/usecases/get_tv_detail.dart' as _i17;
 import 'package:tv_series/domain/usecases/get_tv_detail_recommendation.dart'
     as _i18;
+import 'package:tv_series/domain/usecases/get_watchlist_tv.dart' as _i25;
 import 'package:tv_series/domain/usecases/get_watchlist_tv_status.dart' as _i19;
 import 'package:tv_series/domain/usecases/remove_watchlist_tv.dart' as _i21;
 import 'package:tv_series/domain/usecases/save_watchlist_tv.dart' as _i20;
@@ -746,6 +747,41 @@ class MockGetTopRatedTvSeries extends _i1.Mock
       ) as _i6.Future<_i2.Either<_i7.Failure, List<_i8.TvSeries>>>);
 }
 
+/// A class which mocks [GetWatchListTv].
+///
+/// See the documentation for Mockito's code generation for more information.
+class MockGetWatchListTv extends _i1.Mock implements _i25.GetWatchListTv {
+  MockGetWatchListTv() {
+    _i1.throwOnMissingStub(this);
+  }
+
+  @override
+  _i4.TvSeriesRepository get tvSeriesRepository => (super.noSuchMethod(
+        Invocation.getter(#tvSeriesRepository),
+        returnValue: _FakeTvSeriesRepository_2(
+          this,
+          Invocation.getter(#tvSeriesRepository),
+        ),
+      ) as _i4.TvSeriesRepository);
+  @override
+  _i6.Future<_i2.Either<_i7.Failure, List<_i8.TvSeries>>> execute() =>
+      (super.noSuchMethod(
+        Invocation.method(
+          #execute,
+          [],
+        ),
+        returnValue:
+            _i6.Future<_i2.Either<_i7.Failure, List<_i8.TvSeries>>>.value(
+                _FakeEither_0<_i7.Failure, List<_i8.TvSeries>>(
+          this,
+          Invocation.method(
+            #execute,
+            [],
+          ),
+        )),
+      ) as _i6.Future<_i2.Either<_i7.Failure, List<_i8.TvSeries>>>);
+}
+
 /// A class which mocks [Client].
 ///
 /// See the documentation for Mockito's code generation for more information.
@@ -799,7 +835,7 @@ class MockHttpClient extends _i1.Mock implements _i5.Client {
     Uri? url, {
     Map<String, String>? headers,
     Object? body,
-    _i25.Encoding? encoding,
+    _i26.Encoding? encoding,
   }) =>
       (super.noSuchMethod(
         Invocation.method(
@@ -829,7 +865,7 @@ class MockHttpClient extends _i1.Mock implements _i5.Client {
     Uri? url, {
     Map<String, String>? headers,
     Object? body,
-    _i25.Encoding? encoding,
+    _i26.Encoding? encoding,
   }) =>
       (super.noSuchMethod(
         Invocation.method(
@@ -859,7 +895,7 @@ class MockHttpClient extends _i1.Mock implements _i5.Client {
     Uri? url, {
     Map<String, String>? headers,
     Object? body,
-    _i25.Encoding? encoding,
+    _i26.Encoding? encoding,
   }) =>
       (super.noSuchMethod(
         Invocation.method(
@@ -889,7 +925,7 @@ class MockHttpClient extends _i1.Mock implements _i5.Client {
     Uri? url, {
     Map<String, String>? headers,
     Object? body,
-    _i25.Encoding? encoding,
+    _i26.Encoding? encoding,
   }) =>
       (super.noSuchMethod(
         Invocation.method(
@@ -928,7 +964,7 @@ class MockHttpClient extends _i1.Mock implements _i5.Client {
         returnValue: _i6.Future<String>.value(''),
       ) as _i6.Future<String>);
   @override
-  _i6.Future<_i26.Uint8List> readBytes(
+  _i6.Future<_i27.Uint8List> readBytes(
     Uri? url, {
     Map<String, String>? headers,
   }) =>
@@ -938,8 +974,8 @@ class MockHttpClient extends _i1.Mock implements _i5.Client {
           [url],
           {#headers: headers},
         ),
-        returnValue: _i6.Future<_i26.Uint8List>.value(_i26.Uint8List(0)),
-      ) as _i6.Future<_i26.Uint8List>);
+        returnValue: _i6.Future<_i27.Uint8List>.value(_i27.Uint8List(0)),
+      ) as _i6.Future<_i27.Uint8List>);
   @override
   _i6.Future<_i5.StreamedResponse> send(_i5.BaseRequest? request) =>
       (super.noSuchMethod(

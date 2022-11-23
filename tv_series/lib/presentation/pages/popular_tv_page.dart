@@ -76,6 +76,11 @@ class _PopularTvPageState extends State<PopularTvPage> {
                   itemCount: state.tvSeries.length,
                 ),
               );
+            } else if (state is PopularTvError) {
+              return Center(
+                key: const Key('error_message'),
+                child: Text(state.message),
+              );
             }
             return Container();
           },

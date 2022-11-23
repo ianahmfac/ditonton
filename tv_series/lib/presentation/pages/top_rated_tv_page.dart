@@ -70,6 +70,11 @@ class _TopRatedTvPageState extends State<TopRatedTvPage> {
                     itemCount: state.tvSeries.length,
                   ),
                 );
+              } else if (state is TopRatedTvError) {
+                return Center(
+                  key: const Key('error_message'),
+                  child: Text(state.message),
+                );
               }
               return Container();
             },

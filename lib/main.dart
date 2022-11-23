@@ -14,7 +14,6 @@ import 'package:movie/presentation/pages/movie_detail_page.dart';
 import 'package:movie/presentation/pages/popular_movies_page.dart';
 import 'package:movie/presentation/pages/top_rated_movies_page.dart';
 import 'package:movie/presentation/pages/watchlist_page.dart';
-import 'package:provider/provider.dart';
 import 'package:search/search.dart';
 import 'package:tv_series/presentation/bloc/home_tv/home_tv_now_playing_bloc.dart';
 import 'package:tv_series/presentation/bloc/home_tv/home_tv_popular_bloc.dart';
@@ -23,7 +22,7 @@ import 'package:tv_series/presentation/bloc/now_playing_tv/now_playing_tv_bloc.d
 import 'package:tv_series/presentation/bloc/popular_tv/popular_tv_bloc.dart';
 import 'package:tv_series/presentation/bloc/top_rated_tv/top_rate_tv_bloc.dart';
 import 'package:tv_series/presentation/bloc/tv_detail/tv_detail_bloc_export.dart';
-import 'package:tv_series/presentation/bloc/watchlist_tv_notifier.dart';
+import 'package:tv_series/presentation/bloc/watchlist_tv/watchlist_tv_bloc.dart';
 import 'package:tv_series/presentation/pages/home_tv_page.dart';
 import 'package:tv_series/presentation/pages/now_playing_tv_page.dart';
 import 'package:tv_series/presentation/pages/popular_tv_page.dart';
@@ -40,29 +39,15 @@ void main() {
 class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
-    return MultiProvider(
+    return MultiBlocProvider(
       providers: [
-        BlocProvider(
-          create: (context) => di.locator<HomeMovieNowPlayingBloc>(),
-        ),
-        BlocProvider(
-          create: (context) => di.locator<HomeMoviePopularBloc>(),
-        ),
-        BlocProvider(
-          create: (context) => di.locator<HomeMovieTopRatedBloc>(),
-        ),
-        BlocProvider(
-          create: (_) => di.locator<MovieDetailBloc>(),
-        ),
-        BlocProvider(
-          create: (context) => di.locator<MovieDetailRecommendationBloc>(),
-        ),
-        BlocProvider(
-          create: (context) => di.locator<MovieDetailWatchlistBloc>(),
-        ),
-        BlocProvider(
-          create: (context) => di.locator<SearchBloc>(),
-        ),
+        BlocProvider(create: (context) => di.locator<HomeMovieNowPlayingBloc>()),
+        BlocProvider(create: (context) => di.locator<HomeMoviePopularBloc>()),
+        BlocProvider(create: (context) => di.locator<HomeMovieTopRatedBloc>()),
+        BlocProvider(create: (_) => di.locator<MovieDetailBloc>()),
+        BlocProvider(create: (context) => di.locator<MovieDetailRecommendationBloc>()),
+        BlocProvider(create: (context) => di.locator<MovieDetailWatchlistBloc>()),
+        BlocProvider(create: (context) => di.locator<SearchBloc>()),
         BlocProvider(create: (context) => di.locator<PopularMovieBloc>()),
         BlocProvider(create: (context) => di.locator<TopRatedMovieBloc>()),
         BlocProvider(create: (context) => di.locator<WatchlistMovieBloc>()),
@@ -72,21 +57,11 @@ class MyApp extends StatelessWidget {
         BlocProvider(create: (context) => di.locator<NowPlayingTvBloc>()),
         BlocProvider(create: (context) => di.locator<PopularTvBloc>()),
         BlocProvider(create: (context) => di.locator<TopRatedTvBloc>()),
-        ChangeNotifierProvider(
-          create: (context) => di.locator<WatchListTvNotifier>(),
-        ),
-        BlocProvider(
-          create: (context) => di.locator<SearchTvBloc>(),
-        ),
-        BlocProvider(
-          create: (context) => di.locator<TvDetailBloc>(),
-        ),
-        BlocProvider(
-          create: (context) => di.locator<TvDetailRecommendationBloc>(),
-        ),
-        BlocProvider(
-          create: (context) => di.locator<TvDetailWatchlistBloc>(),
-        ),
+        BlocProvider(create: (context) => di.locator<WatchlistTvBloc>()),
+        BlocProvider(create: (context) => di.locator<SearchTvBloc>()),
+        BlocProvider(create: (context) => di.locator<TvDetailBloc>()),
+        BlocProvider(create: (context) => di.locator<TvDetailRecommendationBloc>()),
+        BlocProvider(create: (context) => di.locator<TvDetailWatchlistBloc>()),
       ],
       child: MaterialApp(
         title: 'Flutter Demo',

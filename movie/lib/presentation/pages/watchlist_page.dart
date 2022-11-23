@@ -1,12 +1,10 @@
 import 'package:core/common/utils.dart';
 import 'package:core/core.dart';
 import 'package:core/presentation/widgets/movie_tv_card.dart';
-import 'package:core/presentation/widgets/state_widget_builder.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:movie/presentation/bloc/watchlist_movie/watchlist_movie_bloc.dart';
-import 'package:provider/provider.dart';
-import 'package:tv_series/presentation/bloc/watchlist_tv_notifier.dart';
+import 'package:tv_series/presentation/bloc/watchlist_tv/watchlist_tv_bloc.dart';
 import 'package:tv_series/presentation/pages/tv_detail_page.dart';
 
 import 'movie_detail_page.dart';
@@ -26,7 +24,7 @@ class _WatchlistPageState extends State<WatchlistPage> with RouteAware {
     super.initState();
     Future.microtask(() {
       context.read<WatchlistMovieBloc>().add(GetWatchlistMovieEvent());
-      context.read<WatchListTvNotifier>().fetchWatchList();
+      context.read<WatchlistTvBloc>().add(GetWatchlistTvEvent());
     });
   }
 
@@ -39,7 +37,7 @@ class _WatchlistPageState extends State<WatchlistPage> with RouteAware {
   @override
   void didPopNext() {
     context.read<WatchlistMovieBloc>().add(GetWatchlistMovieEvent());
-    context.read<WatchListTvNotifier>().fetchWatchList();
+    context.read<WatchlistTvBloc>().add(GetWatchlistTvEvent());
   }
 
   @override
@@ -115,33 +113,38 @@ class _WatchlistPageState extends State<WatchlistPage> with RouteAware {
   }
 
   Widget _buildTvWatchList() {
-    return Consumer<WatchListTvNotifier>(
-      builder: (context, data, child) {
-        final state = data.state;
-        return StateWidgetBuilder(
-          state: state,
-          loadedWidget: (context) {
-            return ListView.builder(
-              itemBuilder: (context, index) {
-                final tv = data.watchlists[index];
-                return MovieTvCard(
-                  onTap: () {
-                    Navigator.pushNamed(
-                      context,
-                      TvDetailPage.routeName,
-                      arguments: tv.id,
-                    );
-                  },
-                  title: tv.name,
-                  overview: tv.overview,
-                  posterPath: tv.posterPath ?? '',
-                );
-              },
-              itemCount: data.watchlists.length,
-            );
-          },
-          errorMessage: data.message,
-        );
+    return BlocBuilder<WatchlistTvBloc, WatchlistTvState>(
+      builder: (context, state) {
+        if (state is WatchlistTvLoading) {
+          return const Center(
+            child: CircularProgressIndicator(),
+          );
+        } else if (state is WatchlistTvLoaded) {
+          return ListView.builder(
+            itemBuilder: (context, index) {
+              final tv = state.tvSeries[index];
+              return MovieTvCard(
+                onTap: () {
+                  Navigator.pushNamed(
+                    context,
+                    TvDetailPage.routeName,
+                    arguments: tv.id,
+                  );
+                },
+                title: tv.name,
+                overview: tv.overview,
+                posterPath: tv.posterPath ?? '',
+              );
+            },
+            itemCount: state.tvSeries.length,
+          );
+        } else if (state is WatchlistTvError) {
+          return Center(
+            key: const Key('error_message'),
+            child: Text(state.message),
+          );
+        }
+        return Container();
       },
     );
   }

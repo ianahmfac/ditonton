@@ -43,7 +43,7 @@ import 'package:tv_series/presentation/bloc/now_playing_tv/now_playing_tv_bloc.d
 import 'package:tv_series/presentation/bloc/popular_tv/popular_tv_bloc.dart';
 import 'package:tv_series/presentation/bloc/top_rated_tv/top_rate_tv_bloc.dart';
 import 'package:tv_series/presentation/bloc/tv_detail/tv_detail_bloc_export.dart';
-import 'package:tv_series/presentation/bloc/watchlist_tv_notifier.dart';
+import 'package:tv_series/presentation/bloc/watchlist_tv/watchlist_tv_bloc.dart';
 
 final locator = GetIt.instance;
 
@@ -88,7 +88,7 @@ void init() {
   locator.registerFactory(() => TvDetailWatchlistBloc(locator(), locator(), locator()));
 
   locator.registerFactory(() => SearchTvBloc(locator()));
-  locator.registerFactory(() => WatchListTvNotifier(getWatchListTv: locator()));
+  locator.registerFactory(() => WatchlistTvBloc(locator()));
 
   // use case
   locator.registerLazySingleton(() => GetNowPlayingMovies(locator()));
