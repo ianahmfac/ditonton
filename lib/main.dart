@@ -1,6 +1,7 @@
 import 'package:about/about.dart';
 import 'package:core/common/utils.dart';
 import 'package:core/core.dart';
+import 'package:core/utils/http_ssl_pinning.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -31,7 +32,9 @@ import 'package:tv_series/presentation/pages/tv_detail_page.dart';
 
 import 'injection.dart' as di;
 
-void main() {
+void main() async {
+  WidgetsFlutterBinding.ensureInitialized();
+  await HttpSSLPinning.init();
   di.init();
   runApp(MyApp());
 }
@@ -44,7 +47,7 @@ class MyApp extends StatelessWidget {
         BlocProvider(create: (context) => di.locator<HomeMovieNowPlayingBloc>()),
         BlocProvider(create: (context) => di.locator<HomeMoviePopularBloc>()),
         BlocProvider(create: (context) => di.locator<HomeMovieTopRatedBloc>()),
-        BlocProvider(create: (_) => di.locator<MovieDetailBloc>()),
+        BlocProvider(create: (context) => di.locator<MovieDetailBloc>()),
         BlocProvider(create: (context) => di.locator<MovieDetailRecommendationBloc>()),
         BlocProvider(create: (context) => di.locator<MovieDetailWatchlistBloc>()),
         BlocProvider(create: (context) => di.locator<SearchBloc>()),

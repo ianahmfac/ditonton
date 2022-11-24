@@ -84,6 +84,15 @@ void main() {
       verify(mockRemoteDataSource.getNowPlayingTvSeries());
       expect(result, equals(const Left(ConnectionFailure('Failed to connect to the network'))));
     });
+
+    test('should return CertificateFailure when url certificate is not valid', () async {
+      // arrange
+      when(mockRemoteDataSource.getNowPlayingTvSeries()).thenThrow(const TlsException());
+      // act
+      final result = await repository.getNowPlayingTvSeries();
+      // assert
+      expect(result, const Left(CertificateFailure('Certificated not valid')));
+    });
   });
 
   group('Popular Tv Series', () {
@@ -116,6 +125,15 @@ void main() {
       // assert
       expect(result, const Left(ConnectionFailure('Failed to connect to the network')));
     });
+
+    test('should return CertificateFailure when url certificate is not valid', () async {
+      // arrange
+      when(mockRemoteDataSource.getPopularTvSeries(1)).thenThrow(const TlsException());
+      // act
+      final result = await repository.getPopularTvSeries(1);
+      // assert
+      expect(result, const Left(CertificateFailure('Certificated not valid')));
+    });
   });
 
   group('Top Rated Tv Series', () {
@@ -147,6 +165,15 @@ void main() {
       final result = await repository.getTopRatedTvSeries(1);
       // assert
       expect(result, const Left(ConnectionFailure('Failed to connect to the network')));
+    });
+
+    test('should return CertificateFailure when url certificate is not valid', () async {
+      // arrange
+      when(mockRemoteDataSource.getTopRatedTvSeries(1)).thenThrow(const TlsException());
+      // act
+      final result = await repository.getTopRatedTvSeries(1);
+      // assert
+      expect(result, const Left(CertificateFailure('Certificated not valid')));
     });
   });
 
@@ -217,6 +244,15 @@ void main() {
       verify(mockRemoteDataSource.getTvDetail(tId));
       expect(result, equals(const Left(ConnectionFailure('Failed to connect to the network'))));
     });
+
+    test('should return CertificateFailure when url certificate is not valid', () async {
+      // arrange
+      when(mockRemoteDataSource.getTvDetail(tId)).thenThrow(const TlsException());
+      // act
+      final result = await repository.getTvDetail(tId);
+      // assert
+      expect(result, const Left(CertificateFailure('Certificated not valid')));
+    });
   });
 
   group('Get Tv Recommendations', () {
@@ -256,6 +292,15 @@ void main() {
       verify(mockRemoteDataSource.getTvDetailRecommendation(tId));
       expect(result, equals(const Left(ConnectionFailure('Failed to connect to the network'))));
     });
+
+    test('should return CertificateFailure when url certificate is not valid', () async {
+      // arrange
+      when(mockRemoteDataSource.getTvDetailRecommendation(tId)).thenThrow(const TlsException());
+      // act
+      final result = await repository.getTvDetailRecommendation(tId);
+      // assert
+      expect(result, const Left(CertificateFailure('Certificated not valid')));
+    });
   });
 
   group('Seach Tv Series', () {
@@ -289,6 +334,15 @@ void main() {
       final result = await repository.searchTvSeries(tQuery);
       // assert
       expect(result, const Left(ConnectionFailure('Failed to connect to the network')));
+    });
+
+    test('should return CertificateFailure when url certificate is not valid', () async {
+      // arrange
+      when(mockRemoteDataSource.searchTvSeries(tQuery)).thenThrow(const TlsException());
+      // act
+      final result = await repository.searchTvSeries(tQuery);
+      // assert
+      expect(result, const Left(CertificateFailure('Certificated not valid')));
     });
   });
 
